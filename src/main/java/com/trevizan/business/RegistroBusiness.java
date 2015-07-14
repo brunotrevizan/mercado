@@ -52,7 +52,12 @@ public class RegistroBusiness implements RegistroService {
 		BigDecimal somaRegistrosPagamento = (BigDecimal) entityManager.createNamedQuery(Registro.SOMA_REGISTRO_CLIENTE_PAGAMENTO)
 				.setParameter("idConta", cliente.getConta().getIdConta())
 				.getSingleResult();
-		return formatarValorRegistro(somaRegistrosDebito.subtract(somaRegistrosPagamento != null ? somaRegistrosPagamento : BigDecimal.ZERO));
+		if (somaRegistrosDebito != null) {
+			return formatarValorRegistro(somaRegistrosDebito.subtract(somaRegistrosPagamento != null ? somaRegistrosPagamento : BigDecimal.ZERO));
+		} else if (somaRegistrosPagamento != null){
+			return formatarValorRegistro(somaRegistrosPagamento);
+		}
+		return formatarValorRegistro(BigDecimal.ZERO);
 	}
 
 	@Override
@@ -73,7 +78,10 @@ public class RegistroBusiness implements RegistroService {
 		return formatarValorRegistro(menorCompra);
 	}
 
-	private String formatarValorRegistro(BigDecimal maiorCompra) {
-		return CIFRA + df.format(maiorCompra.doubleValue());
+	private String formatarValorRegistro(BigDecimal valorRegistro) {
+		if (valorRegistro != null) {
+			return CIFRA + df.format(valorRegistro.doubleValue());
+		}
+		return CIFRA + df.format(BigDecimal.ZERO.doubleValue());
 	}
 }
