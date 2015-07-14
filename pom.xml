@@ -15,9 +15,6 @@
 	</properties>
 
 	<repositories>
-		<!-- Several key Java EE APIs and RIs are missing from the Maven Central 
-			Repository -->
-		<!-- The goal is to eventually eliminate the reliance on the JBoss repository -->
 		<repository>
 			<id>repository.jboss.org</id>
 			<name>JBoss Repository</name>
