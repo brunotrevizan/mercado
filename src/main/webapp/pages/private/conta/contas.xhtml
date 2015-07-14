@@ -1,0 +1,26 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:decorate template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="centro">
+		<p:tabView id="tabViewContas" cache="false" styleClass="sem-borda" dynamic="true">
+		<p:ajax event="tabChange" update="tabCadastro,tabBusca" listener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"/>
+			<p:tab
+				id="tabCadastro"
+				title="Cadastro de Registros">
+				<ui:include src="/pages/private/conta/cadastro-registros.xhtml"/>
+			</p:tab>
+			<p:tab
+				id="tabBusca"
+				title="Busca de Registros">
+				<ui:include src="/pages/private/conta/buscar-registros.xhtml" />
+			</p:tab>
+		</p:tabView>
+	</ui:define>
+</ui:decorate>
+</html>
