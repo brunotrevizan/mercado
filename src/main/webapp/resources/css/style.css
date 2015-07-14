@@ -1,0 +1,47 @@
+body {
+	background-color: #eeeeee;
+	font-size: 15px
+}
+
+.esquerda {
+	text-align: left;
+}
+.centrovalorcliente {
+	align: center;
+	width: 250px;
+	height: 106px;
+}
+
+.valorclientedevedor {
+	align: center;
+	width: 300px;
+	height: 106px;
+	border: 3px rgb(89, 89, 89) solid;
+	color: rgb(255, 6, 6);
+	font-size: 48px;
+	font-weight: inherit;
+	font-family: inherit;
+	font-style: inherit;
+	text-decoration: inherit;
+	text-align: center;
+	line-height: 2.15em;
+}
+
+.valorclientesobra {
+	align: center;
+	width: 300px;
+	height: 106px;
+	border: 3px rgb(89, 89, 89) solid;
+	color: rgb(0, 255, 20);
+	font-size: 48px;
+	font-weight: inherit;
+	font-family: inherit;
+	font-style: inherit;
+	text-decoration: inherit;
+	text-align: center;
+	line-height: 2.15em;
+}
+
+.sem-borda {
+	border: 0px;
+}
