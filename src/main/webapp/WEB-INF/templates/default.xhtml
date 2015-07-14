@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Mercado Trevizan</title>
+	<h:outputStylesheet name="css/style.css" />
+	<h:outputScript name="js/jquery.js" target="head"/>
+	<link rel="shortcut icon" type="image/png" href="/images/falvicon.png"/>
+</h:head>
+<h:body>
+	<div align="center">
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" size="100">
+				<h:graphicImage url="/images/logo.png" />
+			</p:layoutUnit>
+
+			<p:layoutUnit position="west" size="230">
+				<ui:insert name="menu">
+					<h:form>
+						<p:menu toggleable="true">
+							<p:submenu label="Controle de Clientes">
+								<p:menuitem value="Login" icon="ui-icon-key" />
+								<p:menuitem value="Clientes"
+									outcome="/pages/private/clientes/clientes.xhtml"
+									icon="ui-icon-disk" />
+								<p:menuitem value="Conta"
+									outcome="/pages/private/conta/contas.xhtml" icon="ui-icon-disk" />
+							</p:submenu>
+							<p:submenu label="Fechamento do mês">
+								<p:menuitem value="Fechamento" icon="ui-icon-key" />
+							</p:submenu>
+						</p:menu>
+					</h:form>
+				</ui:insert>
+			</p:layoutUnit>
+			<p:layoutUnit id="centro" position="center">
+				<p:ajaxStatus onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+
+				<p:dialog widgetVar="statusDialog" draggable="false" modal="false"
+					closable="false" resizable="false" showHeader="false">
+					<h:graphicImage value="/images/loading.gif" />
+				</p:dialog>
+				<p:messages id="messages" autoUpdate="true" closable="true" />
+				<h:form>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</h:form>
+				<ui:insert name="centro" />
+			</p:layoutUnit>
+		</p:layout>
+	</div>
+</h:body>
+</html>

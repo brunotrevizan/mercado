@@ -1,0 +1,41 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:form id="formCadastroCliente">
+	<fieldset>
+		<legend>Cadastro</legend>
+		<h:panelGrid
+			id="gridCliente"
+			columns="2"
+			cellpadding="3">
+			<h:outputLabel
+				for="nomeCliente"
+				value="Nome:" />
+			<p:inputText
+				id="nomeCliente"
+				required="true"
+				requiredMessage="Digite um nome para o cliente."
+				value="#{clientesWebBean.cliente.nome}" />
+			<h:outputLabel
+				for="telefoneCliente"
+				value="Telefone:" />
+			<p:inputMask
+				id="telefoneCliente"
+				value="#{clientesWebBean.cliente.telefone}"
+				required="true"
+				requiredMessage="Digite um telefone para o cliente."
+				mask="(99) 9999-9999" />
+			<p:commandButton
+				value="Salvar"
+				action="#{clientesWebBean.salvarCliente()}"
+				styleClass="ui-priority-primary"
+				update="gridCliente" />
+		</h:panelGrid>
+	</fieldset>
+</h:form>
+</html>
