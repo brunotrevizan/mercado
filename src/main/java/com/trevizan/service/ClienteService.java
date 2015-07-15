@@ -17,4 +17,6 @@ public interface ClienteService extends Serializable {
 	public List<Cliente> buscarClientesPorNome(String nomeBusca);
 
 	public Cliente buscarClientePorId(Long idCiente);
+
+	public void excluirCliente(Cliente cliente);
 }

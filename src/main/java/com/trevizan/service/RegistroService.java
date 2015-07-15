@@ -20,4 +20,6 @@ public interface RegistroService extends Serializable {
 
 	public String getMenorCompraCliente(Cliente cliente);
 
+	public boolean verificarClienteSaldoPositivo(Cliente cliente);
+
 }

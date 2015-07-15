@@ -9,12 +9,7 @@
 <ui:decorate template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="centro">
 		<p:tabView id="tabViewContas" cache="false" styleClass="sem-borda" dynamic="true">
-		<p:ajax event="tabChange" update="tabCadastro,tabBusca" listener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"/>
-			<p:tab
-				id="tabCadastro"
-				title="Cadastro de Registros">
-				<ui:include src="/pages/private/conta/cadastro-registros.xhtml"/>
-			</p:tab>
+		<p:ajax event="tabChange" update="tabBusca" listener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"/>
 			<p:tab
 				id="tabBusca"
 				title="Busca de Registros">

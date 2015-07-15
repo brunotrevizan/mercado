@@ -2,6 +2,8 @@ package com.trevizan.business;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -27,7 +29,7 @@ public class RegistroBusiness implements RegistroService {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	private DecimalFormat df = new DecimalFormat("#.00");
+	private DecimalFormat df = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
 
 	@Override
 	@Transactional
@@ -80,8 +82,32 @@ public class RegistroBusiness implements RegistroService {
 
 	private String formatarValorRegistro(BigDecimal valorRegistro) {
 		if (valorRegistro != null) {
+			valorRegistro = normalizarValorRegistro(valorRegistro);
 			return CIFRA + df.format(valorRegistro.doubleValue());
 		}
 		return CIFRA + df.format(BigDecimal.ZERO.doubleValue());
+	}
+
+	private BigDecimal normalizarValorRegistro(BigDecimal valorRegistro) {
+		if (valorRegistro.compareTo(BigDecimal.ZERO) < 0) {
+			return valorRegistro.multiply(new BigDecimal(-1));
+		}
+		return valorRegistro;
+	}
+
+	@Override
+	public boolean verificarClienteSaldoPositivo(Cliente cliente) {
+		BigDecimal somaRegistrosDebito = (BigDecimal) entityManager
+				.createNamedQuery(Registro.SOMA_REGISTRO_CLIENTE_DEBITO)
+				.setParameter("idConta", cliente.getConta().getIdConta()).getSingleResult();
+		BigDecimal somaRegistrosPagamento = (BigDecimal) entityManager
+				.createNamedQuery(Registro.SOMA_REGISTRO_CLIENTE_PAGAMENTO)
+				.setParameter("idConta", cliente.getConta().getIdConta()).getSingleResult();
+		if (somaRegistrosDebito != null && somaRegistrosPagamento != null) {
+			return somaRegistrosDebito.compareTo(somaRegistrosPagamento) > 0;
+		} else if (somaRegistrosDebito != null) {
+			return true;
+		}
+		return false;
 	}
 }

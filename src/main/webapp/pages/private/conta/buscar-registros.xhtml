@@ -15,11 +15,12 @@
 					<f:selectItem itemLabel="Selecione" />
 					<f:selectItems value="#{buscaRegistroWebBean.clientes}"
 						var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" />
+					<p:ajax event="change" update=":tabViewContas:formCadastroDeRegistros"/>
 				</p:selectOneMenu>
 
 				<p:commandButton id="buscaRegistros" value="Buscar"
 					actionListener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"
-					update="panelRegistros">
+					update="panelRegistros, :tabViewContas:modalCadastro">
 				</p:commandButton>
 			</h:panelGrid>
 		</fieldset>
@@ -28,8 +29,20 @@
 		<ui:fragment rendered="#{buscaRegistroWebBean.cliente != null}">
 			<fieldset>
 				<legend>Informaçoes do Cliente</legend>
-				<table width="90%" style="float: left;">
+				<table width="90%">
 					<tr>
+						<td style="float: left; text-align:left;">
+							<div class="centrovalorcliente">
+								<div class="valorclientedevedor">
+								<p:outputLabel style="color: rgb(255, 6, 6);" rendered="#{buscaRegistroWebBean.renderizarCorDebito()}" value="#{buscaRegistroWebBean.totalDevedorCliente()}" >
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
+								</p:outputLabel>
+								<p:outputLabel style="color: rgb(0, 255, 55);" rendered="#{!buscaRegistroWebBean.renderizarCorDebito()}" value="#{buscaRegistroWebBean.totalDevedorCliente()}" >
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
+								</p:outputLabel>
+								</div>
+							</div>
+						</td>
 						<td style="color: rgb(10, 88, 214); text-align: left;">
 							<strong>Maior Compra:</strong>
 							<p:outputLabel style="color: rgb(0, 0, 0);" value="#{buscaRegistroWebBean.maiorCompraCliente}">
@@ -42,25 +55,17 @@
 							</p:outputLabel>
 							<br />
 						</td>
-						<td style="float: right; text-align:center;">
-							<p:outputLabel style="font-size: 25px;" value="Saldo" />
-							<div class="centrovalorcliente">
-								<div class="valorclientedevedor">
-								<p:outputLabel style="color: rgb(255, 6, 6);;" value="#{buscaRegistroWebBean.totalDevedorCliente()}" >
-									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
-								</p:outputLabel>
-								</div>
-							</div>
-						</td>
 					</tr>
 				</table>
 			</fieldset>
 		</ui:fragment>
-		<br />
 		<div class="esquerda">
 			<p:dataTable id="dataTableContas" var="registro" scrollable="true"
 				rendered="#{buscaRegistroWebBean.cliente != null}"
 				scrollHeight="500" value="#{buscaRegistroWebBean.registros}">
+				 <f:facet name="header">
+		            <p:commandButton id="cadastro" value="Cadastro de registro" type="button" onclick="PF('cadastroRegistro').show();"/>
+		        </f:facet>
 				<p:column headerText="Ação" width="10%" style="text-align: center">
 					<p:commandButton id="excluirRegistro" icon="ui-icon-closethick"
 						actionListener="#{buscaRegistroWebBean.excluirRegistro(registro)}"
@@ -94,4 +99,5 @@
 		</div>
 	</h:panelGroup>
 </h:form>
+<ui:include src="/pages/private/conta/cadastro-registros.xhtml"/>
 </html>

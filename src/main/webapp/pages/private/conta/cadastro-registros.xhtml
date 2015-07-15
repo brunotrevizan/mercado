@@ -4,37 +4,43 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:form id="formCadastroDeRegistros">
-	<div id="divCadastroRegistros" class="esquerda">
-		<h:panelGrid columns="2" cellpadding="3">
-			<h:outputLabel for="comboClientes" value="Cliente:" />
-			<p:selectOneMenu id="comboClientes" style="width: 300px"
-				converter="omnifaces.SelectItemsConverter" required="true"
-				requiredMessage="Selecione um cliente"
-				value="#{cadastroRegistroWebBean.registro.conta}">
-				<f:selectItem itemLabel="Selecione" />
-				<f:selectItems value="#{cadastroRegistroWebBean.clientes}"
-					var="cliente" itemLabel="#{cliente.nome}"
-					itemValue="#{cliente.conta}" />
-			</p:selectOneMenu>
-			<h:outputLabel for="comboTipo" value="Tipo:" />
-			<p:selectOneMenu id="comboTipo" style="width: 300px"
-				converter="omnifaces.SelectItemsConverter"
-				value="#{cadastroRegistroWebBean.registro.tipoRegistro}">
-				<f:selectItems value="#{cadastroRegistroWebBean.tipos}" var="tipo"
-					itemLabel="#{tipo.tipoRegistro}" itemValue="#{tipo.tipoRegistro}" />
-				<p:ajax event="change" update="comboTipo" />
-			</p:selectOneMenu>
-			<h:outputLabel for="inputValor" value="Valor:" />
-			<p:inputText id="inputValor" required="true"
-				requiredMessage="Digite um valor"
-				value="#{cadastroRegistroWebBean.registro.valor}">
-				<f:convertNumber currencySymbol=","/>
-			</p:inputText>
-			<p:commandButton value="Salvar"
-				action="#{cadastroRegistroWebBean.salvarRegistro}"
-				styleClass="ui-priority-primary" update="formCadastroDeRegistros" />
-		</h:panelGrid>
-	</div>
-</h:form>
+<p:dialog id="modalCadastro" header="Cadastrar" widgetVar="cadastroRegistro" height="170">
+	<h:form id="formCadastroDeRegistros">
+		<div id="divCadastroRegistros" class="esquerda">
+			<h:panelGrid columns="2" cellpadding="3">
+				<h:outputLabel for="comboClientes" value="Cliente:" />
+				#{buscaRegistroWebBean.cliente.nome}
+<!-- 				<p:selectOneMenu id="comboClientes" style="width: 300px" -->
+<!-- 					converter="omnifaces.SelectItemsConverter" required="true" -->
+<!-- 					requiredMessage="Selecione um cliente" -->
+<!-- 					disabled="true" -->
+<!-- 					value="#{buscaRegistroWebBean.cliente}"> -->
+<!-- 					<f:selectItem itemLabel="Selecione" /> -->
+<!-- 					<f:selectItems value="#{cadastroRegistroWebBean.clientes}" -->
+<!-- 						var="cliente" itemLabel="#{cliente.nome}" -->
+<!-- 						itemValue="#{cliente}" /> -->
+<!-- 				</p:selectOneMenu> -->
+				<h:outputLabel for="comboTipo" value="Tipo:" />
+				<p:selectOneMenu id="comboTipo" style="width: 300px"
+					converter="omnifaces.SelectItemsConverter"
+					value="#{buscaRegistroWebBean.registro.tipoRegistro}">
+					<f:selectItems value="#{cadastroRegistroWebBean.tipos}" var="tipo"
+						itemLabel="#{tipo.tipoRegistro}" itemValue="#{tipo.tipoRegistro}" />
+					<p:ajax event="change" update="comboTipo" />
+				</p:selectOneMenu>
+				<h:outputLabel for="inputValor" value="Valor:" />
+				<p:inputText id="inputValor" required="true"
+					requiredMessage="Digite um valor"
+					value="#{buscaRegistroWebBean.registro.valor}">
+					<f:convertNumber currencySymbol="," />
+				</p:inputText>
+				<p:commandButton value="Salvar"
+					actionListener="#{buscaRegistroWebBean.salvarRegistro}"
+					styleClass="ui-priority-primary"
+					update="formCadastroDeRegistros, :tabViewContas:formBuscaRegistros:panelRegistros" 
+					oncomplete="PF('cadastroRegistro').hide();"/>
+			</h:panelGrid>
+		</div>
+	</h:form>
+</p:dialog>
 </html>

@@ -46,6 +46,11 @@ public class ClientesWebBean implements Serializable {
 	public void buscarClientesPorNome() {
 		setClientes(clienteService.buscarClientesPorNome(nomeBusca));
 	}
+	
+	public void excluirCliente(Cliente cliente){
+		clienteService.excluirCliente(cliente);
+		buscarClientes();
+	}
 
 	public void salvarCliente() {
 		try {

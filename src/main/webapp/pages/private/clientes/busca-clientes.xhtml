@@ -28,33 +28,38 @@
 		</div>
 	</fieldset>
 	<br />
-	<p:dataTable
-		id="dataTableClientes"
-		var="cliente"
-		paginator="true"
-		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-		rowsPerPageTemplate="5,10,15"
-		value="#{clientesWebBean.clientes}">
-		<p:column
-			headerText="Ação"
-			style="text-align: center">
-			<p:commandButton
-				icon="ui-icon-gear"
-				title="Editar Cliente">
-			</p:commandButton>
-			<p:commandButton
-				icon="ui-icon-closethick"
-				title="Excluir Cliente">
-			</p:commandButton>
-		</p:column>
-
-		<p:column headerText="Nome" style="text-align: center">
-			<h:outputText value="#{cliente.nome}" />
-		</p:column>
-
-		<p:column headerText="Telefone" style="text-align: center">
-			<h:outputText value="#{cliente.telefone}" />
-		</p:column>
-	</p:dataTable>
+	<h:panelGroup id="panelClientes">
+		<p:dataTable
+			id="dataTableClientes"
+			var="cliente"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15"
+			value="#{clientesWebBean.clientes}">
+			<p:column
+				headerText="Ação"
+				style="text-align: center">
+				<p:commandButton
+					icon="ui-icon-gear"
+					title="Editar Cliente">
+				</p:commandButton>
+				<p:commandButton id="excluirRegistro" icon="ui-icon-closethick"
+					actionListener="#{clientesWebBean.excluirCliente(cliente)}"
+					update="dataTableClientes"
+					title="Excluir Cliente">
+					<p:confirm header="Confirmação" message="Deseja Excluir?"
+						icon="ui-icon-alert" />
+				</p:commandButton>
+			</p:column>
+	
+			<p:column headerText="Nome" style="text-align: center">
+				<h:outputText value="#{cliente.nome}" />
+			</p:column>
+	
+			<p:column headerText="Telefone" style="text-align: center">
+				<h:outputText value="#{cliente.telefone}" />
+			</p:column>
+		</p:dataTable>
+	</h:panelGroup>
 </h:form>
 </html>

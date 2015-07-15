@@ -73,4 +73,12 @@ public class ClienteBusiness implements ClienteService {
 		return entityManager.find(Cliente.class, idCiente);
 	}
 
+	@Override
+	@Transactional
+	public void excluirCliente(Cliente cliente) {
+		cliente = entityManager.find(Cliente.class, cliente.getIdCliente());
+		entityManager.remove(cliente);
+		entityManager.flush();
+	}
+
 }

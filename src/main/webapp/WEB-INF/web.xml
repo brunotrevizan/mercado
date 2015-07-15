@@ -5,8 +5,17 @@
       http://java.sun.com/xml/ns/javaee
       http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.trevizan.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/pages/private/*</url-pattern>
+	</filter-mapping>
+
 	<welcome-file-list>
-		<welcome-file>pages/public/home.xhtml</welcome-file>
+		<welcome-file>pages/private/home.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
@@ -49,10 +58,10 @@
 		<param-name>facelets.DEVELOPMENT</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	<context-param> 
-	    <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name> 
-	    <param-value>true</param-value> 
-	</context-param> 
+	<context-param>
+		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+		<param-value>true</param-value>
+	</context-param>
 
 	<!-- Weld Jetty/Tomcat specific configuration parameters -->
 	<!-- *** The <listener> and <resource-env-ref> elements can be deleted when 

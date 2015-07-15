@@ -1,9 +1,12 @@
 package com.trevizan.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -41,14 +44,37 @@ public class BuscaRegistroWebBean implements Serializable {
 	private List<Registro> registros;
 	
 	private String nomeBusca;
+	
+	private Registro registro;
 
 	@PostConstruct
 	public void initialize() {
 		buscarClientes();
+		registro = new Registro();
+	}
+	
+	public void salvarRegistro(){
+		popularRegistro();
+		registroService.salvarRegistro(registro);
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro para o cliente " + registro.getConta().getCliente().getNome() + " foi inserido com sucesso.", ""));
+		registro= new Registro();
+		buscarRegistrosPorCliente();
+	}
+
+	private void popularRegistro() {
+		registro.setDataRegistro(new Date());
+		registro.setConta(cliente.getConta());
 	}
 	
 	public void buscarClientes() {
 		setClientes(clienteService.buscarClientes());
+	}
+	
+	public boolean renderizarCorDebito() {
+		if (cliente != null) {
+			return registroService.verificarClienteSaldoPositivo(cliente);
+		}
+		return true;
 	}
 	
 	public String totalDevedorCliente(){
@@ -128,4 +154,13 @@ public class BuscaRegistroWebBean implements Serializable {
 	public void setRegistros(List<Registro> registros) {
 		this.registros = registros;
 	}
+
+	public Registro getRegistro() {
+		return registro;
+	}
+
+	public void setRegistro(Registro registro) {
+		this.registro = registro;
+	}
+
 }

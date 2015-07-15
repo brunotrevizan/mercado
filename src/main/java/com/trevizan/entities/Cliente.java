@@ -18,8 +18,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = Cliente.COUNT_CLIENTES_POR_NOME, query = "SELECT COUNT(c)"
 				+ " FROM Cliente c " + "WHERE c.nome = :nome"),
 		@NamedQuery(name = Cliente.CLIENTES_POR_NOME, query = "SELECT c " + " FROM Cliente c "
-				+ "WHERE c.nome LIKE :nome"),
-		@NamedQuery(name = Cliente.BUSCAR_TODOS_CLIENTES, query = "SELECT c FROM Cliente c ") 
+				+ "WHERE c.nome LIKE :nome ORDER BY nome"),
+		@NamedQuery(name = Cliente.BUSCAR_TODOS_CLIENTES, query = "SELECT c FROM Cliente c ORDER BY nome") 
 })
 public class Cliente {
 	public static final String COUNT_CLIENTES_POR_NOME = "COUNT_CLIENTES_POR_NOME";
