@@ -33,6 +33,7 @@ public class LoginBean implements Serializable {
 	 */
 	public String doLogin() {
 		if (usuarioService.verificaUsuarioPodeLogar(username, password)) {
+			limparDadosUsuario();
 			loggedIn = true;
 			return navigationBean.redirectToWelcome();
 		}
@@ -40,17 +41,22 @@ public class LoginBean implements Serializable {
 		return navigationBean.toLogin();
 	}
 
+	private void limparDadosUsuario() {
+		username= null;
+		password = null;
+	}
+
 	/**
 	 * Logout operation.
 	 * 
 	 * @return
 	 */
-	public String doLogout() {
+	public void doLogout() {
 		loggedIn = false;
 		FacesMessage msg = new FacesMessage("Logout success!", "INFO MSG");
 		msg.setSeverity(FacesMessage.SEVERITY_INFO);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		return navigationBean.toLogin();
+		navigationBean.toLogin();
 	}
 
 	public String getUsername() {

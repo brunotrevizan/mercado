@@ -5,35 +5,50 @@
       xmlns:f="http://java.sun.com/jsf/core"   
       xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"  
       xmlns:h="http://java.sun.com/jsf/html">
-
 <h:head>
-	<title>Mercado Trevizan</title>
-
-	<link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'/>
-	<h:outputStylesheet name="css/login.css" />
-
+<title>Mercado Trevizan</title>
+<script type="application/x-javascript"> 
+	addEventListener("load", function() {
+	setTimeout(hideURLbar, 0); }, false); 
+	function hideURLbar(){ window.scrollTo(0,1); 
+	}
+</script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'/>
+<h:outputStylesheet name="css/login.css" />
 </h:head>
-
 <h:body>
-
-	<div class="login-card">
-		<h1>Log-in</h1>
-		<br/>
-		<h:form id="login-form">
-			<h:outputText value="username:" />
-			<h:inputText value="#{loginBean.username}" required="true" requiredMessage="Digite o email." id="username" />
-			<br />
-			<h:outputText value="password:" />
-			<h:inputSecret value="#{loginBean.password}" required="true" requiredMessage="Digite a senha." id="password" />
-			<br />
-			<h:commandButton id="button" value="Login" action="#{loginBean.doLogin}" />
-			<p:messages id="messages" autoUpdate="true" closable="true" />
-			<br />
+	<div class="login-form">
+		<div class="head">
+			<h:graphicImage url="/images/cart_icon.png" />
+		</div>
+		<h:form>
+			<li>
+				<h:inputText 
+					id="username" 
+					value="#{loginBean.username}" 
+					required="true"
+					requiredMessage="Digite o email."/>
+				<a href="#" class=" icon user"></a>
+			</li>
+			<li>
+				<h:inputSecret 
+					id="password"
+					value="#{loginBean.password}" 
+					required="true" 
+					requiredMessage="Digite a senha."/>
+				<a href="#" class=" icon lock"></a>
+			</li>
+			<div class="p-container">
+				 <h:commandButton 
+				 	id="button" 
+				 	styleClass="login login-submit" 
+				 	value="Login" 
+				 	action="#{loginBean.doLogin}">
+				 </h:commandButton>
+				<div class="clear"></div>
+			</div>
+			<p:growl id="growl" showDetail="true" sticky="true" />  
 		</h:form>
 	</div>
-
-	<script
-		src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
-
 </h:body>
 </html>
