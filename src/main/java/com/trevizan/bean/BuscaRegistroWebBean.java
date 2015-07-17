@@ -1,6 +1,7 @@
 package com.trevizan.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -54,11 +55,19 @@ public class BuscaRegistroWebBean implements Serializable {
 	}
 	
 	public void salvarRegistro(){
-		popularRegistro();
-		registroService.salvarRegistro(registro);
-		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro para o cliente " + registro.getConta().getCliente().getNome() + " foi inserido com sucesso.", ""));
-		registro= new Registro();
-		buscarRegistrosPorCliente();
+		if(registroPossuiValor()){
+			popularRegistro();
+			registroService.salvarRegistro(registro);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro para o cliente " + registro.getConta().getCliente().getNome() + " foi inserido com sucesso.", ""));
+			registro= new Registro();
+			buscarRegistrosPorCliente();
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Digite um valor.", ""));
+		}
+	}
+
+	private boolean registroPossuiValor() {
+		return registro.getValor() != null && registro.getValor().compareTo(BigDecimal.ZERO) == 1;
 	}
 
 	private void popularRegistro() {

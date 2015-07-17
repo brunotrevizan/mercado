@@ -25,20 +25,19 @@
 			<li>
 				<h:inputText 
 					id="username" 
-					value="#{loginBean.username}" 
-					required="true"
-					requiredMessage="Digite o email."/>
+					value="#{loginBean.username}"/>
 				<a href="#" class=" icon user"></a>
 			</li>
 			<li>
 				<h:inputSecret 
 					id="password"
-					value="#{loginBean.password}" 
-					required="true" 
-					requiredMessage="Digite a senha."/>
+					value="#{loginBean.password}"/>
 				<a href="#" class=" icon lock"></a>
 			</li>
 			<div class="p-container">
+				<h:commandLink action="#{loginBean.toInfo()}" target="blank">
+					<h:graphicImage height="50" width="50" url="/images/portifolio.png" />
+				</h:commandLink>
 				 <h:commandButton 
 				 	id="button" 
 				 	styleClass="login login-submit" 

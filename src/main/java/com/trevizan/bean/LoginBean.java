@@ -32,6 +32,13 @@ public class LoginBean implements Serializable {
 	 * @return
 	 */
 	public String doLogin() {
+		if(verificaLoginESenhaPreenchidos()){
+			return efetuarLogin();
+		}
+		return "";
+	}
+
+	private String efetuarLogin() {
 		if (usuarioService.verificaUsuarioPodeLogar(username, password)) {
 			limparDadosUsuario();
 			loggedIn = true;
@@ -41,6 +48,22 @@ public class LoginBean implements Serializable {
 		return navigationBean.toLogin();
 	}
 
+	private boolean verificaLoginESenhaPreenchidos() {
+		if(username == null || "".equals(username)){
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN,"Digite o usuário!", ""));
+			return false;
+		}
+		if(password == null || "".equals(password)){
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN,"Digite a senha!", ""));
+			return false;
+		}
+		return true;
+	}
+
+	public String toInfo(){
+		return "/pages/info.xhtml";
+	}
+	
 	private void limparDadosUsuario() {
 		username= null;
 		password = null;
