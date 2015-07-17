@@ -11,18 +11,17 @@
 	<link rel="shortcut icon" type="image/png" href="/images/falvicon.png"/>
 </h:head>
 <h:body>
-	<div align="center">
-		<p:layout fullPage="true">
+	<div align="center" >
+		<p:layout fullPage="true" >
 			<p:layoutUnit position="north" size="100">
 				<h:graphicImage url="/images/logo.png" />
 			</p:layoutUnit>
 
-			<p:layoutUnit position="west" size="230">
+			<p:layoutUnit position="west" size="230" >
 				<ui:insert name="menu">
 					<h:form>
-						<p:menu toggleable="true">
+						<p:menu toggleable="true" >
 							<p:submenu label="Controle de Clientes">
-								<p:menuitem value="Login" icon="ui-icon-key" />
 								<p:menuitem value="Clientes"
 									outcome="/pages/private/clientes/clientes.xhtml"
 									icon="ui-icon-disk" />
@@ -32,6 +31,7 @@
 							<p:submenu label="Fechamento do mês">
 								<p:menuitem value="Fechamento" icon="ui-icon-key" />
 							</p:submenu>
+							<p:menuitem value="logout" action="#{loginBean.doLogout}" icon="ui-icon-key" />
 						</p:menu>
 					</h:form>
 				</ui:insert>
