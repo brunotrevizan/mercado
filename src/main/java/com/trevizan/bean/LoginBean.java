@@ -51,12 +51,9 @@ public class LoginBean implements Serializable {
 	 * 
 	 * @return
 	 */
-	public void doLogout() {
+	public String doLogout() {
 		loggedIn = false;
-		FacesMessage msg = new FacesMessage("Logout success!", "INFO MSG");
-		msg.setSeverity(FacesMessage.SEVERITY_INFO);
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		navigationBean.toLogin();
+		return navigationBean.toLogin();
 	}
 
 	public String getUsername() {
