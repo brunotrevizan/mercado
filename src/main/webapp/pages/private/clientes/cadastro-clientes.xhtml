@@ -12,28 +12,35 @@
 		<h:panelGrid
 			id="gridCliente"
 			columns="2"
-			cellpadding="3">
+			cellpadding="5">
 			<h:outputLabel
 				for="nomeCliente"
 				value="Nome:" />
-			<p:inputText
+			<h:inputText
 				id="nomeCliente"
+				styleClass="form-control"
 				required="true"
 				requiredMessage="Digite um nome para o cliente."
 				value="#{clientesWebBean.cliente.nome}" />
+			<p:spacer width="2"/>
+			<p:spacer width="2"/>
 			<h:outputLabel
 				for="telefoneCliente"
 				value="Telefone:" />
 			<p:inputMask
 				id="telefoneCliente"
+				styleClass="form-control"
 				value="#{clientesWebBean.cliente.telefone}"
 				required="true"
 				requiredMessage="Digite um telefone para o cliente."
 				mask="(99) 9999-9999" />
-			<p:commandButton
+			<p:spacer width="2"/>
+			<p:spacer width="2"/>
+			<p:spacer width="30"/>
+			<h:commandButton
 				value="Salvar"
 				action="#{clientesWebBean.salvarCliente()}"
-				styleClass="ui-priority-primary"
+				styleClass="btn btn-success"
 				update="gridCliente" />
 		</h:panelGrid>
 	</fieldset>

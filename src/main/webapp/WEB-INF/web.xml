@@ -49,6 +49,11 @@
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	
+<!--     <context-param>   -->
+<!--        <param-name>primefaces.THEME</param-name>   -->
+<!--        <param-value>black-tie</param-value>   -->
+<!--     </context-param>   -->
 
 	<!-- This is an optional parameter, but it makes troubleshooting errors 
 		much easier -->
@@ -63,9 +68,6 @@
 		<param-value>true</param-value>
 	</context-param>
 
-	<!-- Weld Jetty/Tomcat specific configuration parameters -->
-	<!-- *** The <listener> and <resource-env-ref> elements can be deleted when 
-		running in a Java EE 6 container *** -->
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>

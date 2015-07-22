@@ -62,7 +62,7 @@ public class BuscaRegistroWebBean implements Serializable {
 			registro= new Registro();
 			buscarRegistrosPorCliente();
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Digite um valor.", ""));
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN, "Digite um valor.", ""));
 		}
 	}
 
@@ -93,6 +93,11 @@ public class BuscaRegistroWebBean implements Serializable {
 		return VALOR_ZERO_REAIS;
 	}
 	
+	public void zerarConta(){
+		contaService.zerarConta(cliente.getConta());
+		buscarRegistrosPorCliente();
+	}
+	
 	public void excluirRegistro(Registro registro){
 		registroService.excluirRegistro(registro);
 		buscarRegistrosPorCliente();
@@ -100,7 +105,7 @@ public class BuscaRegistroWebBean implements Serializable {
 	
 	public void buscarRegistrosPorCliente(){
 		if(cliente != null){
-			registros = contaService.buscarRegistrosPorCliente(cliente);
+			registros = contaService.buscarRegistrosPorConta(cliente.getConta());
 		}
 	}
 	

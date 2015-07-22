@@ -68,7 +68,7 @@ public class CadastroRegistroWebBean implements Serializable {
 	}
 
 	public List<Registro> buscarRegistrosPorCliente() {
-		return contaService.buscarRegistrosPorCliente(cliente);
+		return contaService.buscarRegistrosPorConta(cliente.getConta());
 	}
 
 	public Cliente getCliente() {

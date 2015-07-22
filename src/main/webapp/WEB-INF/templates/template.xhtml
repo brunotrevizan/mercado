@@ -1,0 +1,87 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Mercado Trevizan</title>
+    <h:outputStylesheet name="assets/css/bootstrap.css" />
+    <h:outputStylesheet name="assets/css/font-awesome.css" />
+    <h:outputStylesheet name="assets/css/custom-styles.css" />
+    <h:outputStylesheet name="css/style.css" />
+    <h:outputScript name="js/jquery.js" target="head"/>
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+</h:head>
+<h:body>
+	<div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Trevizan</a>
+            </div>
+
+			<ul id="navbar" class="nav navbar-top-links navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle"
+						data-toggle="dropdown" href="#" aria-expanded="false">
+						<h:form>
+							<h:commandLink action="#{loginBean.doLogout()}">
+								<i class="fa fa-sign-out fa-fw"></i> Logout
+	                      	</h:commandLink>
+							<p:spacer width="10px" />
+						</h:form>
+					</a>
+				</li>
+			</ul>
+		</nav>
+        
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <h:link outcome="/pages/private/clientes/clientes.xhtml">
+                       	 	<i class="fa fa-sitemap"></i> Clientes
+                        </h:link>
+                    </li>
+                    <li>
+                        <h:link outcome="/pages/private/conta/contas.xhtml">
+                        	<i class="fa fa-edit"></i> Contas
+                        </h:link>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+		<div id="page-wrapper">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+			<ui:insert name="centro" />
+			<h:form>
+				<p:dialog widgetVar="statusDialog" style="bottom:27%;"
+					draggable="false" modal="false" closable="false" resizable="false"
+					showHeader="false">
+					<h:graphicImage value="/images/loading.gif" />
+				</p:dialog>
+				<p:ajaxStatus onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+				<p:confirmDialog style="bottom:16%; top:5%;" global="true"
+					showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</h:form>
+		</div>
+
+    <h:outputScript name="assets/js/bootstrap.min.js" target="head"/>
+ </div>   
+</h:body>
+</html>

@@ -4,25 +4,32 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<div id="divCadastroRegistros" class="esquerda">
-	<h:panelGrid columns="2" cellpadding="3">
-		<h:outputLabel for="comboTipo" value="Tipo:" />
-		<p:selectOneMenu id="comboTipo" style="width: 300px"
-			converter="omnifaces.SelectItemsConverter"
-			value="#{buscaRegistroWebBean.registro.tipoRegistro}">
-			<f:selectItems value="#{cadastroRegistroWebBean.tipos}" var="tipo"
-				itemLabel="#{tipo.tipoRegistro}" itemValue="#{tipo.tipoRegistro}" />
-			<p:ajax event="change" update="comboTipo" />
-		</p:selectOneMenu>
-		<h:outputLabel for="inputValor" value="Valor:" />
-		<p:inputText id="inputValor"
-			value="#{buscaRegistroWebBean.registro.valor}">
-			<f:convertNumber currencySymbol="," />
-		</p:inputText>
-		<p:commandButton value="Salvar"
-			actionListener="#{buscaRegistroWebBean.salvarRegistro}"
-			styleClass="ui-priority-primary"
-			update=":tabViewContas:formBuscaRegistros:panelRegistros" />
-	</h:panelGrid>
-</div>
+<h:panelGrid columns="6" cellpadding="3">
+	<p:spacer height="5" />
+	<h:outputLabel for="comboTipo" value="Tipo:" />
+	<p:spacer height="1" />
+	<h:selectOneMenu id="comboTipo" style="width: 300px"
+		disabled="#{buscaRegistroWebBean.cliente == null}"
+		styleClass="form-control" converter="omnifaces.SelectItemsConverter"
+		value="#{buscaRegistroWebBean.registro.tipoRegistro}">
+		<f:selectItems value="#{cadastroRegistroWebBean.tipos}" var="tipo"
+			itemLabel="#{tipo.tipoRegistro}" itemValue="#{tipo.tipoRegistro}" />
+		<p:ajax event="change" update="comboTipo" />
+	</h:selectOneMenu>
+	<p:spacer height="10" />
+	<p:spacer height="10" />
+	<p:spacer height="5" />
+	<h:outputLabel for="inputValor" value="Valor:" />
+	<p:spacer height="4" />
+	<h:inputText id="inputValor" styleClass="form-control"
+		disabled="#{buscaRegistroWebBean.cliente == null}"
+		value="#{buscaRegistroWebBean.registro.valor}">
+		<f:convertNumber currencySymbol="," />
+	</h:inputText>
+	<p:spacer height="50" />
+	<h:commandButton value="Salvar" styleClass="btn btn-success"
+		disabled="#{buscaRegistroWebBean.cliente == null}"
+		actionListener="#{buscaRegistroWebBean.salvarRegistro}"
+		update=":tabViewContas:formBuscaRegistros:panelRegistros" />
+</h:panelGrid>
 </html>

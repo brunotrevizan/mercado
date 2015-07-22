@@ -7,34 +7,35 @@
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:form id="formBuscaClientes">
-	<fieldset>
-		<legend>Busca</legend>
-		<div class="esquerda">
-			<h:panelGrid
-				columns="2"
-				cellpadding="3">
-				<h:outputLabel
-					for="nomeCliente"
-					value="Nome:" />
-				<p:inputText
-					id="nomeClienteBusca"
-					value="#{clientesWebBean.nomeBusca}" />
-				<p:commandButton
-					value="Buscar"
-					action="#{clientesWebBean.buscarClientesPorNome()}"
-					styleClass="ui-priority-primary"
-					update="dataTableClientes" />
-			</h:panelGrid>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Busca</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group">
+					<h:panelGrid columns="6" cellpadding="3">
+						<p:spacer width="10"/>
+						<h:outputLabel for="nomeCliente" value="Nome:" />
+						<p:spacer width="5"/>
+						<h:inputText id="nomeClienteBusca"
+							styleClass="form-control"
+							value="#{clientesWebBean.nomeBusca}" />
+						<p:spacer width="5"/>
+						<h:commandButton value="Buscar"
+							styleClass="btn btn-primary"
+							action="#{clientesWebBean.buscarClientesPorNome()}"
+							update="dataTableClientes" />
+					</h:panelGrid>
+				</div>
+			</div>
 		</div>
-	</fieldset>
+	</div>
 	<br />
 	<h:panelGroup id="panelClientes">
 		<p:dataTable
 			id="dataTableClientes"
 			var="cliente"
-			paginator="true"
-			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="5,10,15"
+			scrollHeight="500" 
 			value="#{clientesWebBean.clientes}">
 			<p:column
 				headerText="Ação"
@@ -52,7 +53,7 @@
 				</p:commandButton>
 			</p:column>
 	
-			<p:column headerText="Nome" style="text-align: center">
+			<p:column headerText="Nome"  style="text-align: center" priority="1">
 				<h:outputText value="#{cliente.nome}" />
 			</p:column>
 	

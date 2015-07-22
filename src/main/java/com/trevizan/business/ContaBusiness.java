@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import com.trevizan.entities.Cliente;
 import com.trevizan.entities.Conta;
 import com.trevizan.entities.Registro;
 import com.trevizan.service.ContaService;
@@ -34,10 +33,20 @@ public class ContaBusiness implements ContaService {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Registro> buscarRegistrosPorCliente(Cliente cliente) {
+	public List<Registro> buscarRegistrosPorConta(Conta conta) {
 		return entityManager.createNamedQuery(Registro.REGISTRO_POR_CONTA)
-				.setParameter("idConta",cliente.getConta().getIdConta())
+				.setParameter("idConta",conta.getIdConta())
 				.getResultList();
+	}
+	
+	@Override
+	@Transactional
+	public void zerarConta(Conta conta) {
+		List<Registro> registros = buscarRegistrosPorConta(conta);
+		for (Registro registro : registros) {
+			entityManager.remove(registro);
+		}
+		entityManager.flush();
 	}
 
 }

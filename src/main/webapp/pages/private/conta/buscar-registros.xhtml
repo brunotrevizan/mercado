@@ -1,61 +1,87 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:form id="formBuscaRegistros">
-	<div id="divBuscaRegistros" class="esquerda">
-		<fieldset>
-			<legend>Busca</legend>
-			<h:panelGrid id="gridContas" columns="2" cellpadding="3">
-				<p:selectOneMenu id="comboClientes" style="width: 300px"
-					converter="omnifaces.SelectItemsConverter"
-					value="#{buscaRegistroWebBean.cliente}">
-					<f:selectItem itemLabel="Selecione" />
-					<f:selectItems value="#{buscaRegistroWebBean.clientes}"
-						var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" />
-				</p:selectOneMenu>
-
-				<p:commandButton id="buscaRegistros" value="Buscar"
-					actionListener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"
-					update="panelRegistros">
-				</p:commandButton>
-			</h:panelGrid>
-		</fieldset>
-	</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Busca
+					</div>
+					<p:spacer width="10"/>
+					<h:panelGrid columns="4" cellpadding="3">
+						<p:spacer width="10"/>
+						<h:selectOneMenu id="comboClientes" style="width: 300px"
+							styleClass="form-control"
+							converter="omnifaces.SelectItemsConverter"
+							value="#{buscaRegistroWebBean.cliente}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{buscaRegistroWebBean.clientes}"
+								var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" />
+						</h:selectOneMenu>
+						<p:spacer width="10"/>
+						<h:commandButton id="buscaRegistros" value="Buscar"
+							styleClass="btn btn-primary"
+							actionListener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"
+							update="panelRegistros">
+						</h:commandButton>
+					</h:panelGrid>
+					<p:spacer width="10"/>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Cadastro
+						</div>
+						<p:spacer width="10"/>
+						<ui:include src="/pages/private/conta/cadastro-registros.xhtml" />
+					</div>
+				</div>
+		</div>
 	<h:panelGroup id="panelRegistros">
 		<ui:fragment rendered="#{buscaRegistroWebBean.cliente != null}">
-				<table width="90%">
-					<tr>
-						<td style="float: left; text-align:left; margin-top: 30px">
-								<div class="centrovalorcliente">
-									<div class="valorclientedevedor">
-									<p:outputLabel style="color: rgb(255, 6, 6);" rendered="#{buscaRegistroWebBean.renderizarCorDebito()}" value="#{buscaRegistroWebBean.totalDevedorCliente()}" >
-										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
-									</p:outputLabel>
-									<p:outputLabel style="color: rgb(0, 255, 55);" rendered="#{!buscaRegistroWebBean.renderizarCorDebito()}" value="#{buscaRegistroWebBean.totalDevedorCliente()}" >
-										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
-									</p:outputLabel>
-									</div>
-								</div>
-						</td>
-						<td style="color: rgb(10, 88, 214); text-align: left;">
-							<fieldset>
-								<legend>Cadastro de Registros</legend>
-								<ui:include src="/pages/private/conta/cadastro-registros.xhtml"/>
-							</fieldset>
-						</td>
-					</tr>
-				</table>
+				<div class="span6">
+					<div class="panel panel-primary text-center no-boder bg-color-blue">
+						<div class="panel-body">
+							<i class="fa fa-shopping-cart fa-5x"></i>
+							<h3>
+								<p:outputLabel style="color: rgb(255, 6, 6);"
+									rendered="#{buscaRegistroWebBean.renderizarCorDebito()}"
+									value="#{buscaRegistroWebBean.totalDevedorCliente()}">
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2"
+										type="number" />
+								</p:outputLabel>
+							</h3>
+							<h3>
+								<p:outputLabel style="color: rgb(0, 255, 55);"
+									rendered="#{!buscaRegistroWebBean.renderizarCorDebito()}"
+									value="#{buscaRegistroWebBean.totalDevedorCliente()}">
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2"
+										type="number" />
+								</p:outputLabel>
+							</h3>
+						</div>
+						<div class="panel-footer back-footer-blue">Débito</div>
+					</div>
+				</div>
 		</ui:fragment>
-		<div class="esquerda">
+
 			<p:dataTable id="dataTableContas" var="registro" scrollable="true"
 				rendered="#{buscaRegistroWebBean.cliente != null}"
 				scrollHeight="500" value="#{buscaRegistroWebBean.registros}">
-				 <f:facet name="header">
-		            <p:commandButton id="zerarConta" value="Zerar Conta" type="button"/>
-		        </f:facet>
+				<f:facet name="header">
+					<p:commandButton id="zerarConta" value="Zerar Conta"
+						actionListener="#{buscaRegistroWebBean.zerarConta()}"
+						update=":tabViewContas:formBuscaRegistros:panelRegistros"
+						title="Zerar Conta">
+						<p:confirm header="Confirmação" message="Deseja zerar a conta?" icon="ui-icon-alert" />
+					</p:commandButton>
+				</f:facet>
 				<p:column headerText="Ação" width="10%" style="text-align: center">
 					<p:commandButton id="excluirRegistro" icon="ui-icon-closethick"
 						actionListener="#{buscaRegistroWebBean.excluirRegistro(registro)}"
@@ -86,7 +112,6 @@
 					</h:outputText>
 				</p:column>
 			</p:dataTable>
-		</div>
 	</h:panelGroup>
 </h:form>
 </html>
