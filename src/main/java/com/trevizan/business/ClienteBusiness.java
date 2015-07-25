@@ -29,6 +29,19 @@ public class ClienteBusiness implements ClienteService {
 	
 	@Inject 
 	ContaService contaService;
+	
+	@Override
+	@Transactional
+	public void salvarEditarCliente(Cliente cliente) throws ClienteBusinessException {
+//		if(!existeClienteCadastrado(cliente)){
+			cliente.setConta(criarContaCliente());
+			entityManager.merge(cliente);
+			entityManager.flush();
+			
+//		} else {
+//			throw new ClienteBusinessException("Já existe um cliente cadastrado com o nome '" + cliente.getNome() + "'.");
+//		}
+	}
 
 	@Override
 	@Transactional

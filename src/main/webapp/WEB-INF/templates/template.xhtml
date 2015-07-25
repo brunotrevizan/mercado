@@ -19,7 +19,21 @@
 	<div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+				<h:form>
+					<p:dialog widgetVar="statusDialog" styleClass="customDialog" draggable="false" modal="false"
+						closable="false" resizable="false" showHeader="false">
+						<h:graphicImage value="/images/loading.gif" />
+					</p:dialog>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" style="bottom:27%;"
+						onsuccess="PF('statusDialog').hide()" />
+					<p:confirmDialog id="confirmDialog" styleClass="customDialog" appendToBody="true" global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</h:form>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -63,22 +77,6 @@
 		<div id="page-wrapper">
 			<p:messages id="messages" autoUpdate="true" closable="true" />
 			<ui:insert name="centro" />
-			<h:form>
-				<p:dialog widgetVar="statusDialog" style="bottom:27%;"
-					draggable="false" modal="false" closable="false" resizable="false"
-					showHeader="false">
-					<h:graphicImage value="/images/loading.gif" />
-				</p:dialog>
-				<p:ajaxStatus onstart="PF('statusDialog').show()"
-					onsuccess="PF('statusDialog').hide()" />
-				<p:confirmDialog style="bottom:16%; top:5%;" global="true"
-					showEffect="fade" hideEffect="fade">
-					<p:commandButton value="Sim" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="Não" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
-			</h:form>
 		</div>
 
     <h:outputScript name="assets/js/bootstrap.min.js" target="head"/>

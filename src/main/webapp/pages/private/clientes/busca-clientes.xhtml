@@ -42,6 +42,9 @@
 				style="text-align: center">
 				<p:commandButton
 					icon="ui-icon-gear"
+					actionListener="#{clientesWebBean.editarCliente(cliente)}"
+					oncomplete="PF('editarCliente').show();"
+					update=":tabViewClientes:formEditarCliente"
 					title="Editar Cliente">
 				</p:commandButton>
 				<p:commandButton id="excluirRegistro" icon="ui-icon-closethick"
@@ -63,4 +66,5 @@
 		</p:dataTable>
 	</h:panelGroup>
 </h:form>
+<ui:include src="/pages/private/clientes/editarCliente.xhtml"/>
 </html>

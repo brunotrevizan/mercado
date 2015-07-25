@@ -12,6 +12,25 @@ body {
 	height: 106px;
 }
 
+.customDialog {
+	width:200px;
+    height:200px;
+    position:fixed;
+    top:50%;
+    left:50%;
+    margin-top:-300px;
+    margin-left:-100px;
+}
+
+.ui-dialog.customDialog .ui-dialog-content {
+    padding: 0;
+    margin: 20px 10px;
+}
+.ui-dialog-titlebar.ui-widget-header.customDialog {
+    color: black;
+    box-shadow: none;
+}
+
 .valorclientedevedor {
 	align: center;
 	width: 300px;

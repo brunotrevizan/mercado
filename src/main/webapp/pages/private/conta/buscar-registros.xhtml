@@ -72,6 +72,7 @@
 		</ui:fragment>
 
 			<p:dataTable id="dataTableContas" var="registro" scrollable="true"
+				reflow="true"
 				rendered="#{buscaRegistroWebBean.cliente != null}"
 				scrollHeight="500" value="#{buscaRegistroWebBean.registros}">
 				<f:facet name="header">

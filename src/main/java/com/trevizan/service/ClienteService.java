@@ -19,4 +19,6 @@ public interface ClienteService extends Serializable {
 	public Cliente buscarClientePorId(Long idCiente);
 
 	public void excluirCliente(Cliente cliente);
+
+	void salvarEditarCliente(Cliente cliente) throws ClienteBusinessException;
 }

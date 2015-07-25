@@ -51,6 +51,14 @@ public class ClientesWebBean implements Serializable {
 		clienteService.excluirCliente(cliente);
 		buscarClientes();
 	}
+	
+	public void editarCliente(Cliente cliente){
+		this.cliente = cliente;
+	}
+	
+	public void fecharEdicaoCliente(){
+		cliente = new Cliente();
+	}
 
 	public void salvarCliente() {
 		try {
@@ -58,6 +66,17 @@ public class ClientesWebBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente '" + cliente.getNome()+ "' cadastrado com sucesso.", ""));
 			cliente = new Cliente();
 		} catch (ClienteBusinessException e) {
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
+		}
+	}
+	
+	public void salvarEditarCliente() {
+		try {
+			clienteService.salvarEditarCliente(cliente);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente '" + cliente.getNome()+ "' editado com sucesso.", ""));
+			cliente = new Cliente();
+		} catch (ClienteBusinessException e) {
+			buscarClientes();
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 		}
 	}
