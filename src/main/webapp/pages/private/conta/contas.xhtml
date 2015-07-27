@@ -8,14 +8,11 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:decorate template="/WEB-INF/templates/template.xhtml">
 	<ui:define name="centro">
-			<p:tabView id="tabViewContas" cache="false" styleClass="sem-borda"
-				dynamic="true">
+			<p:tabView id="tabViewContas" cache="false" styleClass="sem-borda" dynamic="true">
 				<p:ajax event="tabChange" update="tabBusca"
 					listener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}" />
 				<p:tab id="tabBusca" title="Busca de Registros">
-					<div class="row">
-						<ui:include src="/pages/private/conta/buscar-registros.xhtml" />
-					</div>
+					<ui:include src="/pages/private/conta/buscar-registros.xhtml" />
 				</p:tab>
 			</p:tabView>
 	</ui:define>

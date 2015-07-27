@@ -7,24 +7,24 @@
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:form id="formBuscaClientes">
-
 	<div class="panel panel-default">
 		<div class="panel-heading">Busca</div>
 		<div class="panel-body">
 			<div class="row">
 				<div class="form-group">
-					<h:panelGrid columns="6" cellpadding="3">
+					<h:panelGrid columns="7" cellpadding="3">
 						<p:spacer width="10"/>
 						<h:outputLabel for="nomeCliente" value="Nome:" />
 						<p:spacer width="5"/>
 						<h:inputText id="nomeClienteBusca"
 							styleClass="form-control"
-							value="#{clientesWebBean.nomeBusca}" />
+							value="#{clientesWebBean.nomeBusca}"/>
 						<p:spacer width="5"/>
 						<h:commandButton value="Buscar"
 							styleClass="btn btn-primary"
 							action="#{clientesWebBean.buscarClientesPorNome()}"
 							update="dataTableClientes" />
+						<p:spacer width="5"/>
 					</h:panelGrid>
 				</div>
 			</div>
@@ -35,13 +35,14 @@
 		<p:dataTable
 			id="dataTableClientes"
 			var="cliente"
+			reflow="true"
 			scrollHeight="500" 
 			value="#{clientesWebBean.clientes}">
 			<p:column
 				headerText="Ação"
 				style="text-align: center">
 				<p:commandButton
-					icon="ui-icon-gear"
+					icon="fa fa-pencil"
 					actionListener="#{clientesWebBean.editarCliente(cliente)}"
 					oncomplete="PF('editarCliente').show();"
 					update=":tabViewClientes:formEditarCliente"

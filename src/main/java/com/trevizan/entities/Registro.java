@@ -29,11 +29,19 @@ import org.hibernate.annotations.Check;
 			+ " FROM Registro r " 
 			+ "WHERE r.conta.idConta = :idConta "
 			+ " AND r.tipoRegistro = 'Débito'"),
+	@NamedQuery(name = Registro.SOMA_REGISTRO_DEBITO, 
+			query = "SELECT SUM(r.valor) "
+			+ " FROM Registro r " 
+			+ " WHERE r.tipoRegistro = 'Débito'"),
 	@NamedQuery(name = Registro.SOMA_REGISTRO_CLIENTE_PAGAMENTO, 
 			query = "SELECT SUM(r.valor) "
 			+ " FROM Registro r " 
 			+ "WHERE r.conta.idConta = :idConta "
 			+ "AND r.tipoRegistro = 'Pagamento'"),
+	@NamedQuery(name = Registro.SOMA_REGISTRO_PAGAMENTO, 
+			query = "SELECT SUM(r.valor) "
+			+ " FROM Registro r "
+			+ " WHERE r.tipoRegistro = 'Pagamento'"),
 	@NamedQuery(name = Registro.MAIOR_COMPRA_CLIENTE, 
 			query = "SELECT MAX(r.valor) "
 				+ " FROM Registro r " 
@@ -48,6 +56,10 @@ public class Registro {
 	public static final String REGISTRO_POR_CONTA = "REGISTRO_POR_CONTA";
 
 	public static final String SOMA_REGISTRO_CLIENTE_DEBITO = "SOMA_REGISTRO_CLIENTE_DEBITO";
+	
+	public static final String SOMA_REGISTRO_DEBITO = "SOMA_REGISTRO_DEBITO";
+	
+	public static final String SOMA_REGISTRO_PAGAMENTO = "SOMA_REGISTRO_PAGAMENTO";
 	
 	public static final String SOMA_REGISTRO_CLIENTE_PAGAMENTO = "SOMA_REGISTRO_CLIENTE_PAGAMENTO";
 	

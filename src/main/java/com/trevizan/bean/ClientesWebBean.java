@@ -65,6 +65,7 @@ public class ClientesWebBean implements Serializable {
 			clienteService.salvarCliente(cliente);
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente '" + cliente.getNome()+ "' cadastrado com sucesso.", ""));
 			cliente = new Cliente();
+			buscarClientes();
 		} catch (ClienteBusinessException e) {
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 		}

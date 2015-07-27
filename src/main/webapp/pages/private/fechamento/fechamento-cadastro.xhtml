@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:form id="formCadastroFechamento">
+	<fieldset>
+		<legend>Cadastro</legend>
+		<h:panelGrid id="gridFechamento" columns="2" cellpadding="5">
+			<p:outputLabel for="data" value="Data:" />
+			<p:calendar id="data" value="#{fechamentoWebBean.registroFechamento.dataRegistro}"
+				readonlyInput="true" showOn="button" />
+			<p:outputLabel for="inputValor" value="Valor:" />
+			<h:inputText id="inputValor" 
+						 styleClass="form-control"
+						 value="#{fechamentoWebBean.registroFechamento.valor}">
+				<f:convertNumber currencySymbol="," />
+			</h:inputText>
+			<p:spacer width="2"/>
+			<p:spacer width="2"/>
+			<p:spacer width="30"/>
+			<h:commandButton value="Salvar"
+				action="#{fechamentoWebBean.salvarRegistro()}"
+				styleClass="btn btn-success" update="gridFechamento"/>
+		</h:panelGrid>
+	</fieldset>
+</h:form>
+</html>

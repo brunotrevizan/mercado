@@ -22,4 +22,6 @@ public interface RegistroService extends Serializable {
 
 	public boolean verificarClienteSaldoPositivo(Cliente cliente);
 
+	public String totalAReceber();
+
 }

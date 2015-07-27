@@ -110,4 +110,18 @@ public class RegistroBusiness implements RegistroService {
 		}
 		return false;
 	}
+
+	@Override
+	public String totalAReceber() {
+		BigDecimal somaRegistrosDebito = (BigDecimal) entityManager.createNamedQuery(Registro.SOMA_REGISTRO_DEBITO)
+				.getSingleResult();
+		BigDecimal somaRegistrosPagamento = (BigDecimal) entityManager.createNamedQuery(Registro.SOMA_REGISTRO_PAGAMENTO)
+				.getSingleResult();
+		if (somaRegistrosDebito != null) {
+			return formatarValorRegistro(somaRegistrosDebito.subtract(somaRegistrosPagamento != null ? somaRegistrosPagamento : BigDecimal.ZERO));
+		} else if (somaRegistrosPagamento != null){
+			return formatarValorRegistro(somaRegistrosPagamento);
+		}
+		return formatarValorRegistro(BigDecimal.ZERO);
+	}
 }

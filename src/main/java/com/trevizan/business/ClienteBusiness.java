@@ -33,14 +33,9 @@ public class ClienteBusiness implements ClienteService {
 	@Override
 	@Transactional
 	public void salvarEditarCliente(Cliente cliente) throws ClienteBusinessException {
-//		if(!existeClienteCadastrado(cliente)){
 			cliente.setConta(criarContaCliente());
 			entityManager.merge(cliente);
 			entityManager.flush();
-			
-//		} else {
-//			throw new ClienteBusinessException("Já existe um cliente cadastrado com o nome '" + cliente.getNome() + "'.");
-//		}
 	}
 
 	@Override
@@ -92,6 +87,12 @@ public class ClienteBusiness implements ClienteService {
 		cliente = entityManager.find(Cliente.class, cliente.getIdCliente());
 		entityManager.remove(cliente);
 		entityManager.flush();
+	}
+
+	@Override
+	public String totalClientesCadastrados() {
+		Long count =  (Long) entityManager.createNamedQuery(Cliente.COUNT_CLIENTES).getSingleResult();
+		return count.toString();
 	}
 
 }

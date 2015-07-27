@@ -6,45 +6,49 @@
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:form id="formBuscaRegistros">
-			<div class="col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Busca
-					</div>
-					<div class="form-group">
-					<p:spacer width="10"/>
-					<h:panelGrid columns="4" cellpadding="3">
-						<p:spacer width="10"/>
-						<h:selectOneMenu id="comboClientes" style="width: 300px"
-							styleClass="form-control"
-							converter="omnifaces.SelectItemsConverter"
-							value="#{buscaRegistroWebBean.cliente}">
-							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems value="#{buscaRegistroWebBean.clientes}"
-								var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" />
-						</h:selectOneMenu>
-						<p:spacer width="10"/>
-						<h:commandButton id="buscaRegistros" value="Buscar"
-							styleClass="btn btn-primary"
-							actionListener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"
-							update="panelRegistros">
-						</h:commandButton>
-					</h:panelGrid>
-					<p:spacer width="10"/>
-				</div>
-				</div>
-				</div>
-				<div class="col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							Cadastro
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">Busca</div>
+								<div class="panel-body">
+									<div class="form-group">
+										<h:selectOneMenu id="comboClientes" 
+											styleClass="form-control"
+											converter="omnifaces.SelectItemsConverter"
+											value="#{buscaRegistroWebBean.cliente}">
+											<f:selectItem itemLabel="Selecione" />
+											<f:selectItems value="#{buscaRegistroWebBean.clientes}"
+												var="cliente" itemLabel="#{cliente.nome}"
+												itemValue="#{cliente}" />
+											<p:ajax event="change"
+												listener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"
+												update="panelRegistros,gridCadastroRegistros" />
+										</h:selectOneMenu>
+									</div>
+								</div>
+							</div>
 						</div>
-						<p:spacer width="10"/>
-						<ui:include src="/pages/private/conta/cadastro-registros.xhtml" />
+						<div class="col-lg-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">Cadastro</div>
+								<div class="panel-body">
+									<p:spacer width="10" />
+									<ui:include src="/pages/private/conta/cadastro-registros.xhtml" />
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+
 	<h:panelGroup id="panelRegistros">
-		<ui:fragment rendered="#{buscaRegistroWebBean.cliente != null}">
+			<ui:fragment rendered="#{buscaRegistroWebBean.cliente != null}">
 				<div class="span6">
 					<div class="panel panel-primary text-center no-boder bg-color-blue">
 						<div class="panel-body">
@@ -69,11 +73,10 @@
 						<div class="panel-footer back-footer-blue">Débito</div>
 					</div>
 				</div>
-		</ui:fragment>
+			</ui:fragment>
 
 			<p:dataTable id="dataTableContas" var="registro" scrollable="true"
-				reflow="true"
-				rendered="#{buscaRegistroWebBean.cliente != null}"
+				reflow="true" rendered="#{buscaRegistroWebBean.cliente != null}"
 				scrollHeight="500" value="#{buscaRegistroWebBean.registros}">
 				<f:facet name="header">
 					<p:commandButton id="zerarConta" value="Zerar Conta"
@@ -81,11 +84,12 @@
 						update=":tabViewContas:formBuscaRegistros:panelRegistros"
 						onclick="BootstrapDialog.confirm('Hi Apple, are you sure?');"
 						title="Zerar Conta">
-						<p:confirm header="Confirmação" message="Deseja zerar a conta?" icon="ui-icon-alert" />
+						<p:confirm header="Confirmação" message="Deseja zerar a conta?"
+							icon="ui-icon-alert" />
 					</p:commandButton>
-			</f:facet>
+				</f:facet>
 				<p:column headerText="Ação" width="10%" style="text-align: center">
-				<p:commandButton id="excluirRegistro" icon="ui-icon-closethick"
+					<p:commandButton id="excluirRegistro" icon="ui-icon-closethick"
 						actionListener="#{buscaRegistroWebBean.excluirRegistro(registro)}"
 						update=":tabViewContas:formBuscaRegistros:panelRegistros"
 						title="Excluir Registro">
@@ -114,6 +118,6 @@
 					</h:outputText>
 				</p:column>
 			</p:dataTable>
-	</h:panelGroup>
+		</h:panelGroup>
 </h:form>
 </html>
