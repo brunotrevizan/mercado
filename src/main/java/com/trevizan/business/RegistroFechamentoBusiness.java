@@ -1,5 +1,7 @@
 package com.trevizan.business;
 
+import java.util.List;
+
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.enterprise.context.SessionScoped;
@@ -8,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import com.trevizan.dto.RegistroFechamentoConsulta;
 import com.trevizan.entities.RegistroFechamento;
 import com.trevizan.service.RegistroFechamentoService;
 
@@ -34,5 +37,23 @@ public class RegistroFechamentoBusiness implements RegistroFechamentoService {
 		registroFechamento = entityManager.find(RegistroFechamento.class, registroFechamento.getIdRegistroFechamento());
 		entityManager.remove(registroFechamento);
 		entityManager.flush();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<RegistroFechamento> buscarRegistrosCaixa(RegistroFechamentoConsulta registroFechamentoConsulta) {
+		return entityManager.createNamedQuery(RegistroFechamento.REGISTROS_CAIXA_POR_MES_E_ANO)
+					.setParameter("ano", Integer.parseInt(registroFechamentoConsulta.getAno()))
+					.setParameter("mes", Integer.parseInt(registroFechamentoConsulta.getMes()))
+					.getResultList();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<RegistroFechamento> buscarRegistrosGastos(RegistroFechamentoConsulta registroFechamentoConsulta) {
+		return entityManager.createNamedQuery(RegistroFechamento.REGISTROS_GASTOS_POR_MES_E_ANO)
+				.setParameter("ano", Integer.parseInt(registroFechamentoConsulta.getAno()))
+				.setParameter("mes", Integer.parseInt(registroFechamentoConsulta.getMes()))
+				.getResultList();
 	}
 }

@@ -9,20 +9,28 @@
 		<legend>Cadastro</legend>
 		<h:panelGrid id="gridFechamento" columns="2" cellpadding="5">
 			<p:outputLabel for="data" value="Data:" />
-			<p:calendar id="data" value="#{fechamentoWebBean.registroFechamento.dataRegistro}"
+			<p:calendar id="data"
+				value="#{fechamentoWebBean.registroFechamento.dataRegistro}"
 				readonlyInput="true" showOn="button" />
+			<h:outputLabel for="comboTipo" value="Tipo:" />
+			<h:selectOneMenu id="comboTipo"
+				styleClass="form-control"
+				value="#{fechamentoWebBean.registroFechamento.tipoRegistro}">
+				<f:selectItem itemLabel="Caixa" itemValue="CAIXA"/>
+				<f:selectItem itemLabel="Gastos" itemValue="GASTOS"/>
+				<p:ajax event="change" update="comboTipo" />
+			</h:selectOneMenu>
 			<p:outputLabel for="inputValor" value="Valor:" />
-			<h:inputText id="inputValor" 
-						 styleClass="form-control"
-						 value="#{fechamentoWebBean.registroFechamento.valor}">
+			<h:inputText id="inputValor" styleClass="form-control"
+				value="#{fechamentoWebBean.registroFechamento.valor}">
 				<f:convertNumber currencySymbol="," />
 			</h:inputText>
-			<p:spacer width="2"/>
-			<p:spacer width="2"/>
-			<p:spacer width="30"/>
+			<p:spacer width="2" />
+			<p:spacer width="2" />
+			<p:spacer width="30" />
 			<h:commandButton value="Salvar"
 				action="#{fechamentoWebBean.salvarRegistro()}"
-				styleClass="btn btn-success" update="gridFechamento"/>
+				styleClass="btn btn-success" update="gridFechamento" />
 		</h:panelGrid>
 	</fieldset>
 </h:form>
