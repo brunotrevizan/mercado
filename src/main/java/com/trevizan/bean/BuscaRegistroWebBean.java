@@ -23,9 +23,9 @@ import com.trevizan.service.UsuarioService;
 @ViewScoped
 public class BuscaRegistroWebBean implements Serializable {
 
-	private static final String VALOR_ZERO_REAIS = "R$ 0,00";
-
 	private static final long serialVersionUID = -8861855822589790172L;
+	
+	private static final String VALOR_ZERO_REAIS = "R$ 0,00";
 
 	@Inject
 	private UsuarioService usuarioService;
