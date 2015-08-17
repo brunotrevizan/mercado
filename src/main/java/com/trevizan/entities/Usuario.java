@@ -11,15 +11,15 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name = Usuario.USUARIO_POR_EMAIL_E_SENHA, 
+@NamedQueries(value = { @NamedQuery(name = Usuario.USUARIO_POR_USUARIO_E_SENHA, 
 		query = "SELECT u FROM Usuario u "
-		+ "WHERE u.email = :email "
+		+ "WHERE u.login = :login "
 		+ "AND u.senha = :senha")
 })
 @Table(name = "usuario")
 public class Usuario {
 	
-	public static final String USUARIO_POR_EMAIL_E_SENHA = "USUARIO_POR_EMAIL_E_SENHA";
+	public static final String USUARIO_POR_USUARIO_E_SENHA = "USUARIO_POR_USUARIO_E_SENHA";
 
 	@Id
 	@SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_seq", allocationSize = 1)

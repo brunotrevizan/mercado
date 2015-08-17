@@ -1,0 +1,182 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:form id="formRelatoriosFechamento">
+	<div class="panel panel-default">
+		<div class="panel-heading">Relatórios</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group">
+					<div class="col-lg-6">
+						<h:panelGroup id="panelComboAno">
+							<h:outputLabel for="comboAno" value="Ano:" />
+							<h:selectOneMenu id="comboAno" styleClass="form-control"
+								converter="omnifaces.SelectItemsConverter"
+								disabled="#{fechamentoWebBean.desabilitarComboAno()}"
+								value="#{fechamentoWebBean.registroFechamentoConsulta.ano}">
+								<f:selectItem itemLabel="2015" itemValue="2015" />
+								<f:selectItem itemLabel="2016" itemValue="2016" />
+								<f:selectItem itemLabel="2017" itemValue="2017" />
+								<f:selectItem itemLabel="2018" itemValue="2018" />
+								<f:selectItem itemLabel="2019" itemValue="2019" />
+								<f:selectItem itemLabel="2020" itemValue="2020" />
+								<p:ajax event="change" listener="#{fechamentoWebBean.popularRegistros()}" update="panelRelatorios" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+						<h:outputLabel for="comboMes" value="Mês:" />
+						<h:selectOneMenu id="comboMes" styleClass="form-control"
+							label="Mês"
+							value="#{fechamentoWebBean.registroFechamentoConsulta.mes}">
+							<f:selectItem itemLabel="Janeiro" itemValue="1" />
+							<f:selectItem itemLabel="Fevereiro" itemValue="2" />
+							<f:selectItem itemLabel="Março" itemValue="3" />
+							<f:selectItem itemLabel="Abril" itemValue="4" />
+							<f:selectItem itemLabel="Maio" itemValue="5" />
+							<f:selectItem itemLabel="Junho" itemValue="6" />
+							<f:selectItem itemLabel="Julho" itemValue="7" />
+							<f:selectItem itemLabel="Agosto" itemValue="8" />
+							<f:selectItem itemLabel="Setembro" itemValue="9" />
+							<f:selectItem itemLabel="Outubro" itemValue="10" />
+							<f:selectItem itemLabel="Novembro" itemValue="11" />
+							<f:selectItem itemLabel="Dezembro" itemValue="12" />
+							<p:ajax event="change" listener="#{fechamentoWebBean.popularRegistros()}" update="panelRelatorios" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h:panelGroup id="panelRelatorios">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Detalhes
+					</div>
+					<div class="panel-body">
+						<div class="col-md-3 col-sm-12 col-xs-12">
+							<div
+								class="panel panel-primary text-center no-boder bg-color-brown">
+								<div class="panel-body">
+									<i class="fa fa-level-up fa-5x"></i>
+									<h3>#{fechamentoWebBean.totalCaixa()}</h3>
+								</div>
+								<div class="panel-footer back-footer-brown">Total Caixa</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12 col-xs-12">
+							<div
+								class="panel panel-primary text-center no-boder bg-color-red">
+								<div class="panel-body">
+									<i class="fa fa-level-down fa-5x"></i>
+									<h3>#{fechamentoWebBean.totalGastos()}</h3>
+								</div>
+								<div class="panel-footer back-footer-red">Total Gastos</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12 col-xs-12">
+							<div
+								class="panel panel-primary text-center no-boder bg-color-green">
+								<div class="panel-body">
+									<i class="fa fa-usd fa-5x"></i>
+									<h3>#{fechamentoWebBean.lucro()}</h3>
+								</div>
+								<div class="panel-footer back-footer-green">Lucro Médio</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12 col-xs-12">
+							<div class="panel panel-primary text-center no-boder bg-color-blue">
+								<div class="panel-body">
+									<i class="fa fa-line-chart fa-5x"></i>
+									<h3>#{fechamentoWebBean.totalCaixaMenosGastos()}</h3>
+								</div>
+								<div class="panel-footer back-footer-blue">Balanço Geral</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="panel panel-success">
+									<div class="panel-heading">
+										Caixa
+									</div>
+									<div class="panel-body">
+										<p:dataTable id="dataTableCaixa" var="registro" reflow="true"
+											scrollHeight="500" value="#{fechamentoWebBean.registrosCaixa}">
+											<p:column headerText="Ação" style="text-align: center">
+												<p:commandButton id="excluirRegistro"
+													icon="ui-icon-closethick"
+													actionListener="#{fechamentoWebBean.excluirRegistro(registro)}"
+													update="dataTableCaixa,:tabViewFechamento:tabViewRelatorios:formRelatoriosFechamento:panelRelatorios" title="Excluir Registro">
+													<p:confirm header="Confirmação" message="Deseja Excluir?"
+														icon="ui-icon-alert" />
+												</p:commandButton>
+											</p:column>
+	
+											<p:column headerText="Data" style="text-align: center">
+												<h:outputText value="#{registro.dataRegistro}">
+													<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+												</h:outputText>
+											</p:column>
+	
+											<p:column headerText="Valor" style="text-align: center">
+												<h:outputText value="#{registro.valor}">
+													<f:convertNumber maxFractionDigits="2" minFractionDigits="2"
+														type="number" />
+												</h:outputText>
+											</p:column>
+										</p:dataTable>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="panel panel-danger">
+									<div class="panel-heading">
+										<strong>Gastos</strong>
+									</div>
+									<div class="panel-body">
+										<p:dataTable id="dataTableGastos" var="registro" reflow="true"
+											scrollHeight="500"
+											value="#{fechamentoWebBean.registrosGastos}">
+											<p:column headerText="Ação" style="text-align: center">
+												<p:commandButton id="excluirRegistro"
+													icon="ui-icon-closethick"
+													actionListener="#{fechamentoWebBean.excluirRegistro(registro)}"
+													update="dataTableGastos,:tabViewFechamento:tabViewRelatorios:formRelatoriosFechamento:panelRelatorios" title="Excluir Registro">
+													<p:confirm header="Confirmação" message="Deseja Excluir?"
+														icon="ui-icon-alert" />
+												</p:commandButton>
+											</p:column>
+	
+											<p:column headerText="Data" style="text-align: center">
+												<h:outputText value="#{registro.dataRegistro}">
+													<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+												</h:outputText>
+											</p:column>
+	
+											<p:column headerText="Valor" style="text-align: center">
+												<h:outputText value="#{registro.valor}">
+													<f:convertNumber maxFractionDigits="2" minFractionDigits="2"
+														type="number" />
+												</h:outputText>
+											</p:column>
+										</p:dataTable>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h:panelGroup>
+</h:form>
+</html>

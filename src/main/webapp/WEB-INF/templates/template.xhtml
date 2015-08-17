@@ -36,27 +36,16 @@
 	<div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <h:link outcome="/pages/private/home.xhtml" styleClass="navbar-brand" value="Trevizan"/>
             </div>
 
-			<ul id="navbar" class="nav navbar-top-links navbar-right">
-				<li class="dropdown">
-					<a class="dropdown-toggle"
-						data-toggle="dropdown" href="#" aria-expanded="false">
-						<h:form>
-							<h:commandLink action="#{loginBean.doLogout()}">
-								<i class="fa fa-sign-out fa-fw"></i> Logout
-	                      	</h:commandLink>
-							<p:spacer width="10px" />
-						</h:form>
-					</a>
-				</li>
+			<ul id="navbar" class="nav navbar-right">
+				<h:form>
+					<h:commandLink action="#{loginBean.doLogout()}">
+						<i class="fa fa-sign-out fa-fw"></i> Logout
+                      	</h:commandLink>
+					<p:spacer width="10px" />
+				</h:form>
 			</ul>
 		</nav>
         
@@ -76,6 +65,11 @@
                     <li>
                        <h:link outcome="/pages/private/fechamento/fechamento.xhtml">
                        		<i class="fa fa-cogs"></i> Fechamento de caixa
+                       </h:link>
+                   </li>
+                    <li>
+                       <h:link outcome="/pages/private/servicos/servicos.xhtml">
+                       		<i class="fa fa-print"></i> Xerox e segunda via
                        </h:link>
                    </li>
                 </ul>

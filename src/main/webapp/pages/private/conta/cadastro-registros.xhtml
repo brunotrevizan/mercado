@@ -23,13 +23,13 @@
 	<p:spacer height="4" />
 	<h:inputText id="inputValor" styleClass="form-control"
 		disabled="#{buscaRegistroWebBean.cliente == null}"
-		value="#{buscaRegistroWebBean.registro.valor}">
+		value="#{buscaRegistroWebBean.registro.valor}"
+		onkeypress="mascara(this, valor);">
 		<f:convertNumber currencySymbol="," />
 	</h:inputText>
 	<p:spacer height="10" />
 	<h:commandButton value="Salvar" styleClass="btn btn-success"
 		disabled="#{buscaRegistroWebBean.cliente == null}"
-		type="ajax"
 		actionListener="#{buscaRegistroWebBean.salvarRegistro}"
 		update=":tabViewContas:formBuscaRegistros:panelRegistros" />
 </h:panelGrid>

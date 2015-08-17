@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:decorate template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="centro">
+		<p:tabView id="tabViewServicos" styleClass="sem-borda" dynamic="true">
+			<p:tab id="tabUm" title="">
+				<ui:include src="" />
+			</p:tab>
+			<p:tab id="tabDois" title="">
+				<div class="esquerda">
+					<ui:include src="" />
+				</div>
+			</p:tab>
+		</p:tabView>
+	</ui:define>
+</ui:decorate>
+</html>

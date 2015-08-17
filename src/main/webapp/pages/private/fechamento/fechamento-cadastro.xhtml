@@ -22,7 +22,8 @@
 			</h:selectOneMenu>
 			<p:outputLabel for="inputValor" value="Valor:" />
 			<h:inputText id="inputValor" styleClass="form-control"
-				value="#{fechamentoWebBean.registroFechamento.valor}">
+				value="#{fechamentoWebBean.registroFechamento.valor}"
+				onkeypress="mascara(this, valor);">
 				<f:convertNumber currencySymbol="," />
 			</h:inputText>
 			<p:spacer width="2" />

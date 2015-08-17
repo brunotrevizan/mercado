@@ -33,10 +33,10 @@ public class UsuarioBusiness implements UsuarioService {
 		entityManager.flush();
 	}
 
-	public boolean verificaUsuarioPodeLogar(String email, String senha) {
+	public boolean verificaUsuarioPodeLogar(String login, String senha) {
 		try {
-			Usuario usuario = (Usuario) entityManager.createNamedQuery(Usuario.USUARIO_POR_EMAIL_E_SENHA)
-					.setParameter("email", email)
+			Usuario usuario = (Usuario) entityManager.createNamedQuery(Usuario.USUARIO_POR_USUARIO_E_SENHA)
+					.setParameter("login", login)
 					.setParameter("senha", convertStringToMd5(senha))
 					.getSingleResult();
 			return usuario != null;

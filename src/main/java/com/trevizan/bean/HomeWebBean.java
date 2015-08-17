@@ -28,5 +28,4 @@ public class HomeWebBean implements Serializable {
 	public String totalAReceber(){
 		return registroService.totalAReceber();
 	}
-
 }

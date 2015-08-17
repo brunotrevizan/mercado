@@ -31,12 +31,30 @@ import org.hibernate.annotations.Check;
 						+ "WHERE "
 						+ "YEAR(r.dataRegistro) = :ano "
 						+ "AND MONTH(r.dataRegistro) = :mes "
-						+ "AND r.tipoRegistro = 'GASTOS'")
+						+ "AND r.tipoRegistro = 'GASTOS'"),
+	@NamedQuery(name = RegistroFechamento.REGISTROS_CAIXA_POR_ANO, 
+				query = "SELECT SUM(r.valor) "
+						+ " FROM RegistroFechamento r " 
+						+ "WHERE "
+						+ "YEAR(r.dataRegistro) = :ano "
+						+ "AND r.tipoRegistro = 'CAIXA'"),
+	@NamedQuery(name = RegistroFechamento.REGISTROS_GASTOS_POR_ANO, 
+				query = "SELECT SUM(r.valor) "
+						+ " FROM RegistroFechamento r " 
+						+ "WHERE "
+						+ "YEAR(r.dataRegistro) = :ano "
+						+ "AND r.tipoRegistro = 'GASTOS'"),
+	@NamedQuery(name = RegistroFechamento.ANOS_REGISTROS, 
+				query = "SELECT DISTINCT CAST(YEAR(r.dataRegistro) AS string) "
+						+ " FROM RegistroFechamento r ")
 })
 public class RegistroFechamento {
 
 	public static final String REGISTROS_CAIXA_POR_MES_E_ANO = "REGISTROS_CAIXA_POR_MES_E_ANO";
 	public static final String REGISTROS_GASTOS_POR_MES_E_ANO = "REGISTROS_GASTOS_POR_MES_E_ANO";
+	public static final String REGISTROS_CAIXA_POR_ANO = "REGISTROS_CAIXA_POR_ANO";
+	public static final String REGISTROS_GASTOS_POR_ANO = "REGISTROS_GASTOS_POR_ANO";
+	public static final String ANOS_REGISTROS = "ANOS_REGISTROS";
 
 	@Id
 	@SequenceGenerator(name = "registro_fechamento_seq", sequenceName = "registro_fechamento_seq", allocationSize = 1)
@@ -93,6 +111,31 @@ public class RegistroFechamento {
 
 	public void setTipoRegistro(String tipoRegistro) {
 		this.tipoRegistro = tipoRegistro;
+	}
+	
+	public static String getConsultaRegistrosAnualPorMes(String tipo){
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT CAST(EXTRACT(MONTH FROM r.data_registro) AS TEXT) as mes, ");
+		sql.append(" sum(r.valor) AS valor ");
+		sql.append(" FROM ");
+		sql.append(" registro_fechamento r ");
+		sql.append("  WHERE  ");
+		sql.append(" EXTRACT(YEAR from r.data_registro) = :ano ");
+		sql.append(" AND r.tipo = '"+tipo+"' ");
+		sql.append("GROUP BY 1 ");
+		sql.append("ORDER BY 1 ");
+		return sql.toString();
+	}
+	
+	public static String getConsultaValorMaximoMesPorAno(String tipo){
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT max(r.valor) AS valor ");
+		sql.append(" FROM ");
+		sql.append(" registro_fechamento r ");
+		sql.append("  WHERE  ");
+		sql.append(" EXTRACT(YEAR from r.data_registro) = :ano ");
+		sql.append(" AND r.tipo = '"+tipo+"' ");
+		return sql.toString();
 	}
 
 }

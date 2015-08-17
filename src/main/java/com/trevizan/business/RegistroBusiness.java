@@ -1,9 +1,6 @@
 package com.trevizan.business;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -16,21 +13,18 @@ import javax.transaction.Transactional;
 import com.trevizan.entities.Cliente;
 import com.trevizan.entities.Registro;
 import com.trevizan.service.RegistroService;
+import com.trevizan.util.ValorFormatter;
 
 @Named
 @SessionScoped
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class RegistroBusiness implements RegistroService {
 
-	private static final String CIFRA = "R$ ";
-
 	private static final long serialVersionUID = 350473379576921699L;
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	private DecimalFormat df = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
-
 	@Override
 	@Transactional
 	public void salvarRegistro(Registro registro) {
@@ -83,9 +77,9 @@ public class RegistroBusiness implements RegistroService {
 	private String formatarValorRegistro(BigDecimal valorRegistro) {
 		if (valorRegistro != null) {
 			valorRegistro = normalizarValorRegistro(valorRegistro);
-			return CIFRA + df.format(valorRegistro.doubleValue());
+			return ValorFormatter.formatarValor(valorRegistro.doubleValue());
 		}
-		return CIFRA + df.format(BigDecimal.ZERO.doubleValue());
+		return ValorFormatter.formatarValor(BigDecimal.ZERO.doubleValue());
 	}
 
 	private BigDecimal normalizarValorRegistro(BigDecimal valorRegistro) {
