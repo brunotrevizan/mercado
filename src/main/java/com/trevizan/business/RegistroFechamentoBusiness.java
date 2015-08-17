@@ -134,7 +134,7 @@ public class RegistroFechamentoBusiness implements RegistroFechamentoService {
 									.getResultList();
 		for (Object[] object : registros) {
 			RegistroGrafico registroGrafico = new RegistroGrafico();
-			registroGrafico.setLabel((String) object[0]);
+			registroGrafico.setLabel(object[0].toString());
 			registroGrafico.setValor((BigDecimal) object[1]);
 			registrosGrafico.add(registroGrafico);
 		}

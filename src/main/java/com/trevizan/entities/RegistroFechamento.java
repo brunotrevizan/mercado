@@ -115,7 +115,7 @@ public class RegistroFechamento {
 	
 	public static String getConsultaRegistrosAnualPorMes(String tipo){
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT CAST(EXTRACT(MONTH FROM r.data_registro) AS TEXT) as mes, ");
+		sql.append("SELECT CAST(EXTRACT(MONTH FROM r.data_registro) AS INTEGER) as mes, ");
 		sql.append(" sum(r.valor) AS valor ");
 		sql.append(" FROM ");
 		sql.append(" registro_fechamento r ");
