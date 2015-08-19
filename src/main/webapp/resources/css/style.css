@@ -103,7 +103,7 @@ body {
   border-right: solid 1px #2a5bc5;
 }
 .ui-tabs-top .ui-tabs-navscroller .ui-tabs-navscroller-btn-left .ui-icon {
-  background-image: url("/rio/javax.faces.resource/images/left-arrow-white.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/left-arrow-white.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 110%;
@@ -117,7 +117,7 @@ body {
   border-left: solid 1px #2a5bc5;
 }
 .ui-tabs-top .ui-tabs-navscroller .ui-tabs-navscroller-btn-right .ui-icon {
-  background-image: url("/rio/javax.faces.resource/images/right-arrow-white.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/right-arrow-white.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 110%;
@@ -143,7 +143,7 @@ body {
   transition: none;
 }
 .ui-tabs-top .ui-tabs-nav li .ui-icon-close {
-  background-image: url("/rio/javax.faces.resource/images/delete-soft-blue.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/delete-soft-blue.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -151,7 +151,7 @@ body {
 }
 .ui-tabs-top .ui-tabs-nav li.ui-state-hover .ui-icon-close,
 .ui-tabs-top .ui-tabs-nav li.ui-state-active .ui-icon-close {
-  background-image: url("/rio/javax.faces.resource/images/delete.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/delete.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -310,7 +310,7 @@ body {
   padding: 14px 14px !important;
 }
 .ui-tabs-left .ui-tabs-nav li .ui-icon-close {
-  background-image: url("/rio/javax.faces.resource/images/delete-soft-blue.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/delete-soft-blue.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -319,7 +319,7 @@ body {
 }
 .ui-tabs-left .ui-tabs-nav li.ui-state-hover .ui-icon-close,
 .ui-tabs-left .ui-tabs-nav li.ui-state-active .ui-icon-close {
-  background-image: url("/rio/javax.faces.resource/images/delete.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/delete.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -376,7 +376,7 @@ body {
   padding: 14px 14px !important;
 }
 .ui-tabs-right .ui-tabs-nav li .ui-icon-close {
-  background-image: url("/rio/javax.faces.resource/images/delete-soft-blue.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/delete-soft-blue.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -384,7 +384,7 @@ body {
 }
 .ui-tabs-right .ui-tabs-nav li.ui-state-hover .ui-icon-close,
 .ui-tabs-right .ui-tabs-nav li.ui-state-active .ui-icon-close {
-  background-image: url("/rio/javax.faces.resource/images/delete.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/delete.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -456,7 +456,7 @@ body {
   border-right: solid 1px #2a5bc5;
 }
 .ui-tabs-bottom .ui-tabs-navscroller .ui-tabs-navscroller-btn-left .ui-icon {
-  background-image: url("/rio/javax.faces.resource/images/left-arrow-white.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/left-arrow-white.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 110%;
@@ -471,7 +471,7 @@ body {
   border-left: solid 1px #2a5bc5;
 }
 .ui-tabs-bottom .ui-tabs-navscroller .ui-tabs-navscroller-btn-right .ui-icon {
-  background-image: url("/rio/javax.faces.resource/images/right-arrow-white.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/right-arrow-white.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 110%;
@@ -495,7 +495,7 @@ body {
   transition: none;
 }
 .ui-tabs-bottom .ui-tabs-nav li .ui-icon-close {
-  background-image: url("/rio/javax.faces.resource/images/delete-soft-blue.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/delete-soft-blue.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -503,7 +503,7 @@ body {
 }
 .ui-tabs-bottom .ui-tabs-nav li.ui-state-hover .ui-icon-close,
 .ui-tabs-bottom .ui-tabs-nav li.ui-state-active .ui-icon-close {
-  background-image: url("/rio/javax.faces.resource/images/delete.svg.xhtml?ln=primefaces-rio");
+  background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/delete.svg.xhtml?ln=primefaces-rio");
   background-position: center !important;
   background-repeat: no-repeat;
   background-size: 100%;
