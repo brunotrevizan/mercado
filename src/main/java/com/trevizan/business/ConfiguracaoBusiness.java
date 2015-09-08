@@ -9,6 +9,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -62,6 +63,11 @@ public class ConfiguracaoBusiness implements ConfiguracaoService {
 							.getSingleResult();
 		} catch (NoResultException e) {
 			return new Configuracao(BigDecimal.ZERO, BigDecimal.ZERO);
+		}catch (NonUniqueResultException e){
+			return (Configuracao) entityManager.createNamedQuery(Configuracao.CONFIGURACAO_POR_DATA_SERVICO)
+					.setParameter("data", dataServico)
+					.setMaxResults(1)
+					.getResultList().get(0);
 		}
 	}
 }
