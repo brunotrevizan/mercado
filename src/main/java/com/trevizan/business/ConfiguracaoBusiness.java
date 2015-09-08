@@ -61,7 +61,7 @@ public class ConfiguracaoBusiness implements ConfiguracaoService {
 							.setParameter("data", dataServico)
 							.getSingleResult();
 		} catch (NoResultException e) {
-			return new Configuracao();
+			return new Configuracao(BigDecimal.ZERO, BigDecimal.ZERO);
 		}
 	}
 }
