@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:form id="formCadastroFechamento">
+	<fieldset>
+		<legend>Cadastro</legend>
+		<h:outputLabel for="quantidadeServico" value="Quantidade:" />
+		<h:panelGrid id="gridQuantidade" columns="1"
+			style="margin-bottom: 10px">
+			<p:inputText id="quantidadeServico"
+				value="#{servicosWebBean.servico.quantidade}" />
+			<p:slider for="quantidadeServico" />
+		</h:panelGrid>
+		<h:panelGrid id="gridServico" columns="1" cellpadding="5">
+		<p:outputLabel for="data" value="Data:" />
+		<p:calendar id="data"
+			required="true"
+			requiredMessage="Escolha uma data"
+			value="#{servicosWebBean.servico.dataRegistro}"
+			readonlyInput="true" showOn="button" />
+		<h:outputLabel for="comboTipo" value="Tipo:" />
+			<h:selectOneMenu id="comboTipo" styleClass="form-control"
+				converter="omnifaces.SelectItemsConverter"
+				value="#{servicosWebBean.servico.tipoServico}">
+				<f:selectItem itemLabel="Segunda via" itemValue="SEGUNDA_VIA" />
+				<f:selectItem itemLabel="Xerox" itemValue="XEROX" />
+			</h:selectOneMenu>
+			<p:spacer width="10" />
+			<h:commandButton value="Salvar"
+				action="#{servicosWebBean.salvarServico()}"
+				styleClass="btn btn-success" update="gridServico,gridQuantidade" />
+		</h:panelGrid>
+	</fieldset>
+</h:form>
+</html>

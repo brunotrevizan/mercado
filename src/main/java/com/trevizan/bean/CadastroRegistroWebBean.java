@@ -49,7 +49,12 @@ public class CadastroRegistroWebBean implements Serializable {
 	public void initialize() {
 		buscarClientes();
 		setTipos(popularTiposRegistro());
+		inicializarRegistro();
+	}
+
+	private void inicializarRegistro() {
 		registro = new Registro();
+		registro.setDataRegistro(new Date());
 	}
 
 	private List<TipoRegistro> popularTiposRegistro() {
@@ -60,7 +65,7 @@ public class CadastroRegistroWebBean implements Serializable {
 		registro.setDataRegistro(new Date());
 		registroService.salvarRegistro(registro);
 		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro para o cliente " + registro.getConta().getCliente().getNome() + " foi inserido com sucesso.", ""));
-		registro= new Registro();
+		inicializarRegistro();
 	}
 	
 	public void buscarClientes() {

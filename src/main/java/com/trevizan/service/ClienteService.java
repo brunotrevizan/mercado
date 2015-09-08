@@ -23,4 +23,5 @@ public interface ClienteService extends Serializable {
 	void salvarEditarCliente(Cliente cliente) throws ClienteBusinessException;
 
 	public String totalClientesCadastrados();
+
 }

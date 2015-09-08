@@ -7,13 +7,22 @@
 <ui:decorate template="/WEB-INF/templates/template.xhtml">
 	<ui:define name="centro">
 		<p:tabView id="tabViewServicos" styleClass="sem-borda" dynamic="true">
-			<p:tab id="tabUm" title="">
-				<ui:include src="" />
+			<p:tab id="tabUm" title="Cadastro">
+				<ui:include src="/pages/private/servicos/servicos-cadastro.xhtml" />
 			</p:tab>
-			<p:tab id="tabDois" title="">
-				<div class="esquerda">
-					<ui:include src="" />
-				</div>
+			<p:tab id="tabDois" title="Relatórios">
+				<p:tabView id="tabViewRelatorios" styleClass="sem-borda" dynamic="true">
+					<p:tab id="tabMensal" title="Mensal">
+						<div class="esquerda">
+							<ui:include src="/pages/private/servicos/servicos-relatorios-mensal.xhtml" />
+						</div>
+					</p:tab>
+					<p:tab id="tabAnual" title="Anual">
+						<div class="esquerda">
+							<ui:include src="/pages/private/servicos/servicos-relatorios-anual.xhtml" />
+						</div>
+					</p:tab>
+				</p:tabView>
 			</p:tab>
 		</p:tabView>
 	</ui:define>

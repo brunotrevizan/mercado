@@ -15,12 +15,11 @@
 							<h:outputLabel for="comboAno" value="Ano:" />
 							<h:selectOneMenu id="comboAno" styleClass="form-control"
 								converter="omnifaces.SelectItemsConverter"
-								disabled="#{fechamentoWebBean.desabilitarComboAno()}"
-								value="#{fechamentoWebBean.registroFechamentoConsulta.ano}">
-								<f:selectItems value="#{fechamentoWebBean.buscarAnosDisponiveis()}"
+								value="#{servicosWebBean.servicosConsulta.ano}">
+								<f:selectItems value="#{servicosWebBean.buscarAnosDisponiveis()}"
 												var="ano" itemLabel="#{ano}"
 												itemValue="#{ano}" />
-								<p:ajax event="change" listener="#{fechamentoWebBean.popularRegistrosAnual()}" update="panelRelatoriosAnuais" />
+								<p:ajax event="change" listener="#{servicosWebBean.popularRegistrosAnual()}" update="panelRelatoriosAnuais" />
 							</h:selectOneMenu>
 						</h:panelGroup>
 					</div>
@@ -40,20 +39,10 @@
 							<div
 								class="panel panel-primary text-center no-boder bg-color-brown">
 								<div class="panel-body">
-									<i class="fa fa-level-up fa-5x"></i>
-									<h3>#{fechamentoWebBean.totalCaixaAnual()}</h3>
+									<i class="fa fa-file-o fa-5x"></i>
+									<h3>#{servicosWebBean.totalSegundaViaAnual()}</h3>
 								</div>
-								<div class="panel-footer back-footer-brown">Total Caixa</div>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-12 col-xs-12">
-							<div
-								class="panel panel-primary text-center no-boder bg-color-red">
-								<div class="panel-body">
-									<i class="fa fa-level-down fa-5x"></i>
-									<h3>#{fechamentoWebBean.totalGastosAnual()}</h3>
-								</div>
-								<div class="panel-footer back-footer-red">Total Gastos</div>
+								<div class="panel-footer back-footer-brown">Total Segunda Via</div>
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-12 col-xs-12">
@@ -61,18 +50,28 @@
 								class="panel panel-primary text-center no-boder bg-color-green">
 								<div class="panel-body">
 									<i class="fa fa-usd fa-5x"></i>
-									<h3>#{fechamentoWebBean.lucroAnual()}</h3>
+									<h3>#{servicosWebBean.valorTotalSegundaViaAnual()}</h3>
 								</div>
-								<div class="panel-footer back-footer-green">Lucro Médio</div>
+								<div class="panel-footer back-footer-green">Valor Segunda Via</div>
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-12 col-xs-12">
-							<div class="panel panel-primary text-center no-boder bg-color-blue">
+							<div
+								class="panel panel-primary text-center no-boder bg-color-blue">
 								<div class="panel-body">
-									<i class="fa fa-line-chart fa-5x"></i>
-									<h3>#{fechamentoWebBean.totalCaixaMenosGastosAnual()}</h3>
+									<i class="fa fa-print fa-5x"></i>
+									<h3>#{servicosWebBean.totalXeroxAnual()}</h3>
 								</div>
-								<div class="panel-footer back-footer-blue">Balanço Geral</div>
+								<div class="panel-footer back-footer-blue">Total Xerox</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12 col-xs-12">
+							<div class="panel panel-primary text-center no-boder bg-color-green">
+								<div class="panel-body">
+									<i class="fa fa-usd fa-5x"></i>
+									<h3>#{servicosWebBean.valorTotalXeroxAnual()}</h3>
+								</div>
+								<div class="panel-footer back-footer-green">Valor Xerox</div>
 							</div>
 						</div>
 					</div>
@@ -84,7 +83,7 @@
 						Gráficos
 					</div>
 					<div class="panel-body">
-						<p:chart type="line" model="#{fechamentoWebBean.balancoAnual}" style="height:300px;"/>
+						<p:chart type="line" model="#{servicosWebBean.balancoAnual}" style="height:300px;"/>
 					</div>
 				</div>
 			</div>

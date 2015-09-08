@@ -129,12 +129,19 @@ public class RegistroFechamento {
 	
 	public static String getConsultaValorMaximoMesPorAno(String tipo){
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT max(r.valor) AS valor ");
-		sql.append(" FROM ");
-		sql.append(" registro_fechamento r ");
-		sql.append("  WHERE  ");
-		sql.append(" EXTRACT(YEAR from r.data_registro) = :ano ");
-		sql.append(" AND r.tipo = '"+tipo+"' ");
+		sql.append(" select max(valor) from (");
+		sql.append(" SELECT");
+		sql.append("         sum(r.valor) AS valor,");
+		sql.append("          EXTRACT(MONTH from r.data_registro) as mes");
+		sql.append("     FROM");
+		sql.append("         registro_fechamento r   ");
+		sql.append("                 WHERE ");
+		sql.append("                     EXTRACT(YEAR "); 
+		sql.append("                 from ");
+		sql.append("                     r.data_registro) = :ano");
+		sql.append("                     AND r.tipo = '"+ tipo + "'" );
+		sql.append("                             group by mes ");
+		sql.append("                             order by mes) as valorMaximoMes ");
 		return sql.toString();
 	}
 

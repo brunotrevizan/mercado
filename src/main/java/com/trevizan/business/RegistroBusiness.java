@@ -77,9 +77,9 @@ public class RegistroBusiness implements RegistroService {
 	private String formatarValorRegistro(BigDecimal valorRegistro) {
 		if (valorRegistro != null) {
 			valorRegistro = normalizarValorRegistro(valorRegistro);
-			return ValorFormatter.formatarValor(valorRegistro.doubleValue());
+			return ValorFormatter.formatarValor(valorRegistro.doubleValue(), true);
 		}
-		return ValorFormatter.formatarValor(BigDecimal.ZERO.doubleValue());
+		return ValorFormatter.formatarValor(BigDecimal.ZERO.doubleValue(), true);
 	}
 
 	private BigDecimal normalizarValorRegistro(BigDecimal valorRegistro) {

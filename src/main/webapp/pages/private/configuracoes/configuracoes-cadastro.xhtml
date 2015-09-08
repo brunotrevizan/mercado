@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:form id="formCadastroFechamento">
+	<fieldset>
+		<legend>Cadastro</legend>
+		<h:panelGrid id="gridConfiguracoes" columns="2" cellpadding="5">
+			<p:outputLabel for="inputValorSegundaVia" value="Valor Segunda Via:" />
+			<h:inputText id="inputValorSegundaVia" styleClass="form-control"
+				value="#{configuracaoWebBean.configuracao.valorSegundaVia}"
+				onkeypress="mascara(this, valor);">
+				<f:convertNumber currencySymbol="," />
+			</h:inputText>
+			<p:outputLabel for="inputValorXerox" value="Valor Xerox:" />
+			<h:inputText id="inputValorXerox" styleClass="form-control"
+				value="#{configuracaoWebBean.configuracao.valorXerox}"
+				onkeypress="mascara(this, valor);">
+			</h:inputText>
+			<p:spacer width="2" />
+			<p:spacer width="2" />
+			<p:spacer width="30" />
+			<h:commandButton value="Salvar"
+				action="#{configuracaoWebBean.salvarConfiguracao()}"
+				styleClass="btn btn-success" update="gridConfiguracoes" />
+		</h:panelGrid>
+	</fieldset>
+</h:form>
+</html>

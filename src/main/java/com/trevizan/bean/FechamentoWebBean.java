@@ -3,6 +3,7 @@ package com.trevizan.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -41,10 +42,15 @@ public class FechamentoWebBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		setRegistroFechamento(new RegistroFechamento());
+		inicializarRegistroFechamento();
 		inicializarRegistroFechamentoConsulta();
 		popularRegistros();
 		popularRegistrosAnual();
+	}
+
+	private void inicializarRegistroFechamento() {
+		setRegistroFechamento(new RegistroFechamento());
+		getRegistroFechamento().setDataRegistro(new Date());
 	}
 
 	public void popularRegistros() {
@@ -64,7 +70,6 @@ public class FechamentoWebBean implements Serializable {
 		balancoAnual = inicializarBalancoAnual();
 		balancoAnual.setTitle("Balanço Anual");
 		balancoAnual.setLegendPosition("e");
-		balancoAnual.setShowPointLabels(true);
 		balancoAnual.setAnimate(true);
 		Axis xAxis = balancoAnual.getAxis(AxisType.X);
 		Axis yAxis = balancoAnual.getAxis(AxisType.Y);
@@ -115,7 +120,7 @@ public class FechamentoWebBean implements Serializable {
 		try {
 			return registroFechamentoService.getTotalRegistros(getRegistrosCaixa());
 		} catch (Exception e) {
-			return ValorFormatter.formatarValor(0d);
+			return ValorFormatter.formatarValor(0d, true);
 		}
 	}
 	
@@ -123,7 +128,7 @@ public class FechamentoWebBean implements Serializable {
 		try {
 			return registroFechamentoService.getTotalRegistros(getRegistrosGastos());
 		} catch (Exception e) {
-			return ValorFormatter.formatarValor(0d);
+			return ValorFormatter.formatarValor(0d, true);
 		}
 	}
 	
@@ -131,7 +136,7 @@ public class FechamentoWebBean implements Serializable {
 		try {
 			return registroFechamentoService.getLucro(getRegistrosCaixa());
 		} catch (Exception e) {
-			return ValorFormatter.formatarValor(0d);
+			return ValorFormatter.formatarValor(0d, true);
 		}
 	}
 	
@@ -139,7 +144,7 @@ public class FechamentoWebBean implements Serializable {
 		try {
 			return registroFechamentoService.totalCaixaMenosGastos(getRegistrosCaixa(), getRegistrosGastos());
 		} catch (Exception e) {
-			return ValorFormatter.formatarValor(0d);
+			return ValorFormatter.formatarValor(0d, true);
 		}
 	}
 	
@@ -147,7 +152,7 @@ public class FechamentoWebBean implements Serializable {
 		try {
 			return registroFechamentoService.getTotalCaixaAnual(registroFechamentoConsulta.getAno());
 		} catch (Exception e) {
-			return ValorFormatter.formatarValor(0d);
+			return ValorFormatter.formatarValor(0d, true);
 		}
 	}
 	
@@ -155,7 +160,7 @@ public class FechamentoWebBean implements Serializable {
 		try {
 			return registroFechamentoService.getTotalGastosAnual(registroFechamentoConsulta.getAno());
 		} catch (Exception e) {
-			return ValorFormatter.formatarValor(0d);
+			return ValorFormatter.formatarValor(0d, true);
 		}
 	}
 	
@@ -163,7 +168,7 @@ public class FechamentoWebBean implements Serializable {
 		try {
 			return registroFechamentoService.getLucroAnual(registroFechamentoConsulta.getAno());
 		} catch (Exception e) {
-			return ValorFormatter.formatarValor(0d);
+			return ValorFormatter.formatarValor(0d, true);
 		}
 	}
 	
@@ -171,7 +176,7 @@ public class FechamentoWebBean implements Serializable {
 		try {
 			return registroFechamentoService.totalCaixaMenosGastosAnual(registroFechamentoConsulta.getAno());
 		} catch (Exception e) {
-			return ValorFormatter.formatarValor(0d);
+			return ValorFormatter.formatarValor(0d, true);
 		}
 	}
 

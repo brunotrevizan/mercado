@@ -64,7 +64,7 @@ public class RegistroFechamentoBusiness implements RegistroFechamentoService {
 	@Override
 	public String getTotalRegistros(List<RegistroFechamento> registros) {
 		BigDecimal totalRegistros = getTotalLista(registros);
-		return ValorFormatter.formatarValor(totalRegistros.doubleValue());
+		return ValorFormatter.formatarValor(totalRegistros.doubleValue(), true);
 	}
 
 	private BigDecimal getTotalLista(List<RegistroFechamento> registros) {
@@ -79,26 +79,26 @@ public class RegistroFechamentoBusiness implements RegistroFechamentoService {
 	public String getLucro(List<RegistroFechamento> registrosCaixa) {
 		BigDecimal totalRegistros = getTotalLista(registrosCaixa);
 		totalRegistros = totalRegistros.multiply(new BigDecimal(0.3));
-		return ValorFormatter.formatarValor(totalRegistros.doubleValue());
+		return ValorFormatter.formatarValor(totalRegistros.doubleValue(), true);
 	}
 
 	@Override
 	public String totalCaixaMenosGastos(List<RegistroFechamento> registrosCaixa, List<RegistroFechamento> registrosGastos) {
 		BigDecimal totalCaixa = getTotalLista(registrosCaixa);
 		BigDecimal totalGastos = getTotalLista(registrosGastos);
-		return ValorFormatter.formatarValor(totalCaixa.subtract(totalGastos).doubleValue());
+		return ValorFormatter.formatarValor(totalCaixa.subtract(totalGastos).doubleValue(), true);
 	}
 
 	@Override
 	public String getTotalCaixaAnual(String ano) {
 		BigDecimal totalCaixaAnual = buscarTotalCaixaPorAno(ano);
-		return ValorFormatter.formatarValor(totalCaixaAnual.doubleValue());
+		return ValorFormatter.formatarValor(totalCaixaAnual.doubleValue(), true);
 	}
 	
 	@Override
 	public String getTotalGastosAnual(String ano) {
 		BigDecimal totalGastosAnual = buscarTotalGastosPorAno(ano);
-		return ValorFormatter.formatarValor(totalGastosAnual.doubleValue());
+		return ValorFormatter.formatarValor(totalGastosAnual.doubleValue(), true);
 	}
 	private BigDecimal buscarTotalGastosPorAno(String ano){
 		return (BigDecimal) entityManager.createNamedQuery(RegistroFechamento.REGISTROS_GASTOS_POR_ANO)
@@ -115,14 +115,14 @@ public class RegistroFechamentoBusiness implements RegistroFechamentoService {
 	public String getLucroAnual(String ano) {
 		BigDecimal totalCaixaAno = buscarTotalCaixaPorAno(ano);
 		totalCaixaAno = totalCaixaAno.multiply(new BigDecimal(0.3));
-		return ValorFormatter.formatarValor(totalCaixaAno.doubleValue());
+		return ValorFormatter.formatarValor(totalCaixaAno.doubleValue(), true);
 	}
 
 	@Override
 	public String totalCaixaMenosGastosAnual(String ano) {
 		BigDecimal totalCaixaAnual = buscarTotalCaixaPorAno(ano);
 		BigDecimal totalGastosAnual = buscarTotalGastosPorAno(ano);
-		return ValorFormatter.formatarValor(totalCaixaAnual.subtract(totalGastosAnual).doubleValue());
+		return ValorFormatter.formatarValor(totalCaixaAnual.subtract(totalGastosAnual).doubleValue(), true);
 	}
 
 	@Override
@@ -148,6 +148,7 @@ public class RegistroFechamentoBusiness implements RegistroFechamentoService {
 					.setParameter("ano", Integer.parseInt(ano))
 					.getSingleResult();
 		}catch (Exception e) {
+			e.printStackTrace();
 			return BigDecimal.ZERO;
 		}
 	}

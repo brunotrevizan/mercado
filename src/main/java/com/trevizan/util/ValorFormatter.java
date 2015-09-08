@@ -10,8 +10,12 @@ public class ValorFormatter {
 	
 	private static DecimalFormat df = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
 	
-	public static String formatarValor(double valor){
-		return CIFRA + df.format(valor);
+	public static String formatarValor(double valor, boolean cifra) {
+		if (cifra) {
+			return CIFRA + df.format(valor);
+		} else {
+			return df.format(valor);
+		}
 	}
 
 }
