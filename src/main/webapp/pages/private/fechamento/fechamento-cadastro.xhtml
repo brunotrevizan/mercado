@@ -10,6 +10,8 @@
 		<h:panelGrid id="gridFechamento" columns="2" cellpadding="5">
 			<p:outputLabel for="data" value="Data:" />
 			<p:calendar id="data"
+				required="true"
+				requiredMessage="Selecione uma data"
 				value="#{fechamentoWebBean.registroFechamento.dataRegistro}"
 				readonlyInput="true" showOn="button" />
 			<h:outputLabel for="comboTipo" value="Tipo:" />
@@ -22,6 +24,8 @@
 			</h:selectOneMenu>
 			<p:outputLabel for="inputValor" value="Valor:" />
 			<h:inputText id="inputValor" styleClass="form-control"
+				required="true"
+				requiredMessage="Digite um valor"
 				value="#{fechamentoWebBean.registroFechamento.valor}"
 				onkeypress="mascara(this, valor);">
 				<f:convertNumber currencySymbol="," />

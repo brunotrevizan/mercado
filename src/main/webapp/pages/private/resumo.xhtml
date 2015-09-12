@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:decorate template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="centro">
+		<div id="page-inner">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">
+						Mercado Trevizan <small>Resumo</small>
+					</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="panel panel-primary text-center no-boder bg-color-brown">
+						<div class="panel-body">
+							<i class="fa fa-users fa-5x"></i>
+							<h3>#{homeWebBean.totalClientesCadastrados()}</h3>
+						</div>
+						<div class="panel-footer back-footer-brown">Clientes Cadastrados</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="panel panel-primary text-center no-boder bg-color-blue">
+						<div class="panel-body">
+							<i class="fa fa-shopping-cart fa-5x"></i>
+							<h3>#{homeWebBean.totalAReceber()}</h3>
+						</div>
+						<div class="panel-footer back-footer-blue">Total a receber</div>
+					</div>
+				</div>
+				
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="panel panel-primary text-center no-boder bg-color-green">
+						<div class="panel-body">
+							<i class="fa fa-print fa-5x"></i>
+							<h3>#{homeWebBean.totalXeroxMes()}</h3>
+						</div>
+						<div class="panel-footer back-footer-green">Total Xerox Mês</div>
+					</div>
+				</div>
+				
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div
+						class="panel panel-primary text-center no-boder bg-color-red">
+						<div class="panel-body">
+							<i class="fa fa-file-o fa-5x"></i>
+							<h3>#{homeWebBean.totalSegundaViaMes()}</h3>
+						</div>
+						<div class="panel-footer back-footer-red">Total Segunda Via Mês</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</ui:define>
+</ui:decorate>
+</html>
