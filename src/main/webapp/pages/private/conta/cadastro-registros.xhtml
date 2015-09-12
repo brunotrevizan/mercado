@@ -10,8 +10,6 @@
 	<p:spacer height="1" />
 	<h:selectOneMenu id="comboTipo" 
 		disabled="#{buscaRegistroWebBean.cliente == null}"
-		required="true"
-		requiredMessage="Selecione uma data"
 		styleClass="form-control" converter="omnifaces.SelectItemsConverter"
 		value="#{buscaRegistroWebBean.registro.tipoRegistro}">
 		<f:selectItems value="#{cadastroRegistroWebBean.tipos}" var="tipo"
@@ -25,8 +23,6 @@
 	<p:spacer height="4" />
 	<h:inputText id="inputValor" styleClass="form-control"
 		disabled="#{buscaRegistroWebBean.cliente == null}"
-		required="true"
-		requiredMessage="Digite um valor"
 		value="#{buscaRegistroWebBean.registro.valor}"
 		onkeypress="mascara(this, valor);">
 		<f:convertNumber currencySymbol="," />

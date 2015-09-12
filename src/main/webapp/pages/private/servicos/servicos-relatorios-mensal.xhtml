@@ -108,7 +108,7 @@
 												<p:commandButton id="excluirServico"
 													icon="ui-icon-closethick"
 													actionListener="#{servicosWebBean.excluirServico(servico)}"
-													update="dataTableSegundaVia" title="Excluir Registro">
+													update="dataTableSegundaVia,:tabViewServicos:tabViewRelatorios:formRelatoriosFechamento:panelRelatorios" title="Excluir Registro">
 													<p:confirm header="Confirmação" message="Deseja Excluir?"
 														icon="ui-icon-alert" />
 												</p:commandButton>
@@ -137,7 +137,7 @@
 											<p:commandButton id="excluirServico"
 												icon="ui-icon-closethick"
 												actionListener="#{servicosWebBean.excluirServico(servico)}"
-												update="dataTableXerox" title="Excluir Registro">
+												update="dataTableXerox,:tabViewServicos:tabViewRelatorios:formRelatoriosFechamento:panelRelatorios" title="Excluir Registro">
 												<p:confirm header="Confirmação" message="Deseja Excluir?"
 													icon="ui-icon-alert" />
 											</p:commandButton>

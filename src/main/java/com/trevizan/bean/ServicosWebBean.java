@@ -177,7 +177,7 @@ public class ServicosWebBean implements Serializable {
 
 	public void excluirServico(Servico servico) {
 		servicosService.excluirServico(servico);
-		 popularRegistros();
+		popularRegistros();
 	}
 
 	public void popularRegistros() {
