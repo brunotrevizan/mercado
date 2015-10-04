@@ -40,8 +40,42 @@ public class ServicosBusiness implements ServicosService {
 	@Override
 	@Transactional
 	public void salvarServico(Servico servico) {
-		entityManager.persist(servico);
-		entityManager.flush();
+		if (existeServicoCadastradoProDia(servico)) {
+			Servico servicoCadastrado = buscarServicoCadastradoProDia(servico);
+			servicoCadastrado.setQuantidade(servicoCadastrado.getQuantidade() + servico.getQuantidade());
+			entityManager.merge(servicoCadastrado);
+			entityManager.flush();
+		} else {
+			entityManager.persist(servico);
+			entityManager.flush();
+		}
+	}
+
+	private Servico buscarServicoCadastradoProDia(Servico servico) {
+		try {
+			return (Servico) entityManager.createNamedQuery(Servico.SERVICO_POR_DIA_E_TIPO)
+					.setParameter("data", servico.getDataRegistro())
+					.setParameter("tipo", servico.getTipoServico()).getSingleResult();
+		} catch (NonUniqueResultException e) {
+			return (Servico) entityManager.createNamedQuery(Servico.SERVICO_POR_DIA_E_TIPO)
+					.setParameter("data", servico.getDataRegistro())
+					.setParameter("tipo", servico.getTipoServico()).getResultList().get(0);
+		}
+	}
+	
+	private boolean existeServicoCadastradoProDia(Servico servico) {
+		Servico servicoCadastrado = null;
+		try {
+			servicoCadastrado = (Servico) entityManager
+					.createNamedQuery(Servico.SERVICO_POR_DIA_E_TIPO)
+					.setParameter("data", servico.getDataRegistro())
+					.setParameter("tipo", servico.getTipoServico()).getSingleResult();
+		} catch (NoResultException e) {
+			return false;
+		} catch (NonUniqueResultException e) {
+			return true;
+		}
+		return servicoCadastrado != null;
 	}
 
 	@Override

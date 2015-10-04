@@ -57,7 +57,13 @@ import org.hibernate.annotations.Check;
 					+ " FROM Servico s " 
 					+ "WHERE "
 					+ "YEAR(s.dataRegistro) = :ano "
-					+ "AND s.tipoServico = 'XEROX'")
+					+ "AND s.tipoServico = 'XEROX'"),
+	@NamedQuery(name = Servico.SERVICO_POR_DIA_E_TIPO, 
+		query = "SELECT servico "
+				+ " FROM Servico servico " 
+				+ "WHERE "
+				+ "servico.dataRegistro = :data "
+				+ "AND servico.tipoServico = :tipo")
 })
 public class Servico {
 	public static final String SERVICOS_SEGUNDA_VIA_POR_ANO = "SERVICOS_SEGUNDA_VIA_POR_ANO";
@@ -67,6 +73,7 @@ public class Servico {
 	public static final String ANOS_SERVICOS = "ANOS_SERVICOS";
 	public static final String QUANTIDADE_SERVICOS_SEGUNDA_VIA_POR_ANO = "QUANTIDADE_SERVICOS_SEGUNDA_VIA_POR_ANO";
 	public static final String QUANTIDADE_SERVICOS_XEROX_POR_ANO = "QUANTIDADE_SERVICOS_XEROX_POR_ANO";
+	public static final String SERVICO_POR_DIA_E_TIPO = "SERVICO_POR_DIA_E_TIPO";
 
 	@Id
 	@SequenceGenerator(name = "servico_seq", sequenceName = "servico_seq", allocationSize = 1)
