@@ -192,6 +192,7 @@ public class FechamentoWebBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro cadastrado com sucesso", ""));
 		popularRegistros();
 		popularRegistrosAnual();
+		inicializarRegistroFechamento();
 	}
 	
 	public void excluirRegistro(RegistroFechamento registroFechamento){
