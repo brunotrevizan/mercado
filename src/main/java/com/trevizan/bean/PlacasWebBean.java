@@ -61,9 +61,7 @@ public class PlacasWebBean implements Serializable {
 	        JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
 	        FacesContext.getCurrentInstance().responseComplete();
 			limparAtributos();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JRException e) {
+		} catch (IOException | JRException e) {
 			e.printStackTrace();
 		}
 	}
