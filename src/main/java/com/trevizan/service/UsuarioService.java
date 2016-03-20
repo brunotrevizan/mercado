@@ -10,4 +10,5 @@ import com.trevizan.entities.Usuario;
 public interface UsuarioService extends Serializable {
 	public void salvarUsuario(Usuario usuario);
 	public boolean verificaUsuarioPodeLogar(String login, String senha);
+	public Usuario buscarUsuarioPorLogin(String username);
 }

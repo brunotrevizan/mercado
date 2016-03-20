@@ -2,11 +2,16 @@ package com.trevizan.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.trevizan.entities.Usuario;
 import com.trevizan.service.HomeService;
 import com.trevizan.util.Util;
 
@@ -18,6 +23,15 @@ public class HomeWebBean implements Serializable {
 
 	@Inject
 	private HomeService homeService;
+	
+	private Usuario usuarioLogado;
+	
+	@PostConstruct
+	public void inicializar(){
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		usuarioLogado = (Usuario) sessionMap.get("usuarioLogado");
+	}
 	
 	public String totalClientesCadastrados(){
 		return homeService.totalClientesCadastrados();
@@ -43,15 +57,15 @@ public class HomeWebBean implements Serializable {
 		return Util.getHoraFormatter().format(new Date())+ "h";
 	}
 	
-	@SuppressWarnings("deprecation")
 	public String buscarSaudacao() {
-		int hora = new Date().getHours();
-		if (hora < 12) {
-			return "Bom dia";
-		} else if (hora > 12 && hora < 19) {
-			return "Boa tarde";
-		} else {
-			return "Boa noite";
-		}
+		return "Olá " + getUsuarioLogado().getNome();
+	}
+
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
 	}
 }

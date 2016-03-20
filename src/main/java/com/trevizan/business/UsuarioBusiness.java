@@ -64,4 +64,11 @@ public class UsuarioBusiness implements UsuarioService {
 		}
 	}
 
+	@Override
+	public Usuario buscarUsuarioPorLogin(String username) {
+		return (Usuario) entityManager.createNamedQuery(Usuario.USUARIO_POR_USUARIO)
+				.setParameter("login", username)
+				.getSingleResult();
+	}
+
 }

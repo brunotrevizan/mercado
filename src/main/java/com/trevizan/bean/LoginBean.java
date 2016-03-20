@@ -40,6 +40,7 @@ public class LoginBean implements Serializable {
 
 	private String efetuarLogin() {
 		if (usuarioService.verificaUsuarioPodeLogar(username, password)) {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuarioService.buscarUsuarioPorLogin(username));
 			limparDadosUsuario();
 			loggedIn = true;
 			return navigationBean.redirectToWelcome();

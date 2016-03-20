@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:decorate template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="centro">
+		<script>  
+            function mascara(o, f) {  
+              v_obj = o;  
+              v_fun = f;  
+              setTimeout("execmascara()", 1);  
+            }  
+            function execmascara() {  
+              v_obj.value = v_fun(v_obj.value);  
+            }  
+         	function valor(v) {  
+		        v = v.replace(/\D/g, "");  
+		        v = v.replace(/[0-9]{15}/, "invÃ¡lido");  
+		        v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos  
+		        // Ãºltimos 11 digitos  
+		        v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos  
+		        // Ãºltimos 8 digitos  
+		        v = v.replace(/(\d{1})(\d{5})$/, "$1.$2"); // coloca ponto antes dos  
+		        // Ãºltimos 5 digitos  
+		        v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2"); // coloca virgula antes dos  
+		        // Ãºltimos 2 digitos  
+		        return v;  
+			}  
+        </script>
+		<p:tabView id="tabViewServicos" styleClass="sem-borda" dynamic="true">
+			<p:tab id="tabUm" title="Placas">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="panel panel-default">
+											<div class="panel-heading">Placas</div>
+											<div class="panel-body">
+												<div class="form-group">
+													<h:form id="formPlacas">
+														<p:outputLabel for="inputProduto" value="Nome do produto" />
+														<h:inputText id="inputProduto" styleClass="form-control"
+															required="true"
+															requiredMessage="O Nome do produto está vazio."
+															value="#{placasWebBean.nome}">
+														</h:inputText>
+
+														<p:outputLabel for="inputValorProduto" value="Valor" />
+														<h:inputText id="inputValorProduto"
+															maxlength="10"
+															required="true"
+															requiredMessage="O Valor do produto está vazio."
+															styleClass="form-control" value="#{placasWebBean.valor}"
+															onkeypress="mascara(this, valor);">
+															<f:convertNumber currencySymbol="," />
+														</h:inputText>
+														<br/>
+														<p:outputLabel for="inputSegundaPlaca" value="Duas Placas?" />
+														<p:selectBooleanCheckbox id="inputSegundaPlaca"
+																style="margin-left: 5px;"
+																value="#{placasWebBean.segundaPlaca}" />
+														<br/>
+														<h:commandLink value="Imprimir Placa" target="_blank"
+															style="float: right; font-size: 20px; color: blue;"
+															action="#{placasWebBean.imprimirPlaca()}" />
+													</h:form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</p:tab>
+		</p:tabView>
+	</ui:define>
+</ui:decorate>
+</html>
