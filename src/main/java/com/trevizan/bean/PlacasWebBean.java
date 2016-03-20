@@ -57,6 +57,7 @@ public class PlacasWebBean implements Serializable {
 			JasperPrint jasperPrint = JasperFillManager.fillReport(absoluteDiskPath, new HashMap(), beanCollectionDataSource);
 
 	        httpServletResponse.addHeader("Content-disposition", "filename=report.pdf");
+	        httpServletResponse.setContentType("application/pdf");
 	        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
 	        JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
 	        FacesContext.getCurrentInstance().responseComplete();
