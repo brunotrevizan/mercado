@@ -46,7 +46,7 @@ public class PlacasWebBean implements Serializable {
 		try {
 			popularPlacaDTO();
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			String relativeWebPath = "/pages/private/relatorios/duas_placas.jasper";
+			String relativeWebPath = getCaminhoRelatorio();
 			ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
 			String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
 			
@@ -66,6 +66,22 @@ public class PlacasWebBean implements Serializable {
 		} catch (IOException | JRException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void marcarDesmarcarInvertida(){
+		if(isPrimeiraPlacaVirada()){
+			setPrimeiraPlacaVirada(false);
+		}
+	}
+	
+	private String getCaminhoRelatorio() {
+		String relativeWebPath = "/pages/private/relatorios/";
+		if(isPrimeiraPlacaVirada()){
+			relativeWebPath += "duas_placas_invertida.jasper";
+		} else {
+			relativeWebPath += "duas_placas.jasper";
+		}
+		return relativeWebPath;
 	}
 
 	private void limparAtributos() {

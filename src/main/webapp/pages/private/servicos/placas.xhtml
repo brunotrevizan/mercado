@@ -64,7 +64,9 @@
 														<p:selectBooleanCheckbox id="inputSegundaPlaca"
 															style="margin-left: 5px;"
 															value="#{placasWebBean.segundaPlaca}">
-															<p:ajax event="change" update="tabViewServicos:formPlacas:panelVirarPlaca" />
+															<p:ajax event="change" 
+															listener="#{placasWebBean.marcarDesmarcarInvertida()}"
+															update="tabViewServicos:formPlacas:panelVirarPlaca" />
 														</p:selectBooleanCheckbox>
 														<br/>
 														<h:panelGroup id="panelVirarPlaca" >
