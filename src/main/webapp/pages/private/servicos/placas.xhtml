@@ -59,11 +59,24 @@
 															<f:convertNumber currencySymbol="," />
 														</h:inputText>
 														<br/>
-														<p:outputLabel for="inputSegundaPlaca" value="Duas Placas?" />
+														<p:outputLabel for="inputSegundaPlaca"
+															value="Duas Placas?" />
 														<p:selectBooleanCheckbox id="inputSegundaPlaca"
-																style="margin-left: 5px;"
-																value="#{placasWebBean.segundaPlaca}" />
+															style="margin-left: 5px;"
+															value="#{placasWebBean.segundaPlaca}">
+															<p:ajax event="change" update="tabViewServicos:formPlacas:panelVirarPlaca" />
+														</p:selectBooleanCheckbox>
 														<br/>
+														<h:panelGroup id="panelVirarPlaca" >
+															<p:outputLabel for="inputPrimeiraPlacaVirada"
+																rendered="#{placasWebBean.segundaPlaca}"
+																value="Primeira placa virada?" />
+															<p:selectBooleanCheckbox id="inputPrimeiraPlacaVirada"
+																rendered="#{placasWebBean.segundaPlaca}"
+																style="margin-left: 5px;"
+																value="#{placasWebBean.primeiraPlacaVirada}" />
+															<br />
+														</h:panelGroup>
 														<h:commandLink value="Imprimir Placa" target="_blank"
 															style="float: right; font-size: 20px; color: blue;"
 															action="#{placasWebBean.imprimirPlaca()}" />

@@ -25,12 +25,13 @@
 				<h:graphicImage value="/images/loading.gif" />
 			</p:dialog>
 			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="customDialog">
+			<p:confirmDialog id="confirmModal" global="true" showEffect="fade"  hideEffect="fade" styleClass="customDialog">
 				<p:commandButton value="Sim" type="button"
 					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 				<p:commandButton value="Não" type="button"
 					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>
+			<p:draggable for="confirmModal" />
 		</h:form>
 	</div>
 	<div id="wrapper">

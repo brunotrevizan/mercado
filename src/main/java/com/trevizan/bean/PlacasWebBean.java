@@ -33,6 +33,7 @@ public class PlacasWebBean implements Serializable {
 	private String nome;
 	private BigDecimal valor;
 	private boolean segundaPlaca = false;
+	private boolean primeiraPlacaVirada = false;
 	private PlacaDTO placaDTO;
 	
 	@PostConstruct
@@ -76,6 +77,7 @@ public class PlacasWebBean implements Serializable {
 		placaDTO.setNome(getNome());
 		placaDTO.setValor(ValorFormatter.formatarValor(getValor().doubleValue(), true));
 		placaDTO.setSegundaPlaca(isSegundaPlaca());
+		placaDTO.setVirada(primeiraPlacaVirada);
 	}
 
 	public String getNome() {
@@ -108,6 +110,14 @@ public class PlacasWebBean implements Serializable {
 
 	public void setSegundaPlaca(boolean segundaPlaca) {
 		this.segundaPlaca = segundaPlaca;
+	}
+
+	public boolean isPrimeiraPlacaVirada() {
+		return primeiraPlacaVirada;
+	}
+
+	public void setPrimeiraPlacaVirada(boolean primeiraPlacaVirada) {
+		this.primeiraPlacaVirada = primeiraPlacaVirada;
 	}
 
 }

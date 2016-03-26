@@ -18,10 +18,10 @@ body {
 }
 
 .customDialog {
-    position: absolute;
+    position: fixed;
     width: 600px;
     height: 400px;
-    margin-top: -20%;
+    margin-top: -30%;
 }
 
 .valorclientedevedor {

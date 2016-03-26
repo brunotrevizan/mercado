@@ -2,12 +2,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="duas_placas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="9efc804a-1427-4ac0-abf4-34bdbc728858">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="112"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="nome" class="java.lang.String"/>
 	<parameter name="valor" class="java.lang.String"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="valor" class="java.lang.String"/>
 	<field name="segundaPlaca" class="java.lang.Boolean"/>
+	<field name="virada" class="java.lang.Boolean"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -21,34 +22,59 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="481" splitType="Stretch">
+		<band height="231">
+			<printWhenExpression><![CDATA[$F{segundaPlaca} && $F{virada}]]></printWhenExpression>
 			<textField>
-				<reportElement positionType="Float" x="0" y="45" width="555" height="108" uuid="2b8fded6-449c-4f43-96d2-5562548151e7"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement positionType="Float" x="0" y="24" width="555" height="99" uuid="186fb4cb-06a8-49fc-94d7-09ab54df4ef1">
+					<printWhenExpression><![CDATA[$F{virada}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="UpsideDown">
+					<font size="75"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="0" y="123" width="555" height="108" uuid="6f871b2c-a36d-4701-89b1-d885d536e8c4">
+					<printWhenExpression><![CDATA[$F{virada}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="UpsideDown">
+					<font size="50"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="208">
+			<printWhenExpression><![CDATA[$F{segundaPlaca} && !$F{virada}]]></printWhenExpression>
+			<textField>
+				<reportElement positionType="Float" x="0" y="0" width="555" height="108" uuid="c4d11c6f-b8e3-45a7-bbed-57dcb9f79a47">
+					<printWhenExpression><![CDATA[!$F{virada}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 					<font size="50"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="153" width="555" height="99" uuid="e224e0a4-6318-46ba-a682-a5889b776cbd"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+				<reportElement positionType="Float" x="0" y="108" width="555" height="99" uuid="3e452c3c-6fa0-4d6e-861f-364ecdc7cd67">
+					<printWhenExpression><![CDATA[!$F{virada}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 					<font size="75"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="305">
-			<printWhenExpression><![CDATA[$F{segundaPlaca}]]></printWhenExpression>
+		<band height="529" splitType="Stretch">
 			<textField>
-				<reportElement positionType="Float" x="0" y="17" width="555" height="108" uuid="6f871b2c-a36d-4701-89b1-d885d536e8c4"/>
+				<reportElement positionType="Float" x="0" y="294" width="555" height="108" uuid="2b8fded6-449c-4f43-96d2-5562548151e7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="50"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="125" width="555" height="99" uuid="186fb4cb-06a8-49fc-94d7-09ab54df4ef1"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="0" y="402" width="555" height="99" uuid="e224e0a4-6318-46ba-a682-a5889b776cbd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
 					<font size="75"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>

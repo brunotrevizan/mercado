@@ -4,6 +4,7 @@ public class PlacaDTO {
 	private String nome;
 	private String valor;
 	private boolean segundaPlaca;
+	private boolean virada;
 
 	public String getNome() {
 		return nome;
@@ -27,6 +28,14 @@ public class PlacaDTO {
 
 	public void setSegundaPlaca(boolean segundaPlaca) {
 		this.segundaPlaca = segundaPlaca;
+	}
+
+	public boolean isVirada() {
+		return virada;
+	}
+
+	public void setVirada(boolean virada) {
+		this.virada = virada;
 	}
 
 }
