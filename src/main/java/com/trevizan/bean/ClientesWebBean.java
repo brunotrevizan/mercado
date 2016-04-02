@@ -27,6 +27,8 @@ public class ClientesWebBean implements Serializable {
 	@Inject
 	private ClienteService clienteService;
 
+	private Cliente clienteEdicao;
+	
 	private Cliente cliente;
 
 	private List<Cliente> clientes;
@@ -52,42 +54,42 @@ public class ClientesWebBean implements Serializable {
 		buscarClientes();
 	}
 	
-	public void editarCliente(Cliente cliente){
-		this.cliente = cliente;
+	public void editarCliente(Cliente clienteEdicao){
+		this.clienteEdicao = clienteEdicao;
 	}
 	
 	public void fecharEdicaoCliente(){
-		cliente = new Cliente();
+		clienteEdicao = new Cliente();
 	}
 
 	public void salvarCliente() {
 		try {
 			clienteService.salvarCliente(cliente);
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente '" + cliente.getNome()+ "' cadastrado com sucesso.", ""));
-			cliente = new Cliente();
 			buscarClientes();
 		} catch (ClienteBusinessException e) {
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 		}
+		cliente = new Cliente();
 	}
 	
 	public void salvarEditarCliente() {
 		try {
-			clienteService.salvarEditarCliente(cliente);
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente '" + cliente.getNome()+ "' editado com sucesso.", ""));
-			cliente = new Cliente();
+			clienteService.salvarEditarCliente(clienteEdicao);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente '" + clienteEdicao.getNome()+ "' editado com sucesso.", ""));
+			clienteEdicao = new Cliente();
 		} catch (ClienteBusinessException e) {
 			buscarClientes();
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 		}
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Cliente getClienteEdicao() {
+		return clienteEdicao;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setClienteEdicao(Cliente clienteEdicao) {
+		this.clienteEdicao = clienteEdicao;
 	}
 
 	public UsuarioService getUsuarioService() {
@@ -121,4 +123,13 @@ public class ClientesWebBean implements Serializable {
 	public void setNomeBusca(String nomeBusca) {
 		this.nomeBusca = nomeBusca;
 	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
 }

@@ -22,6 +22,7 @@ import com.trevizan.dto.RegistroFechamentoConsulta;
 import com.trevizan.dto.RegistroGrafico;
 import com.trevizan.entities.RegistroFechamento;
 import com.trevizan.service.RegistroFechamentoService;
+import com.trevizan.util.Util;
 import com.trevizan.util.ValorFormatter;
 
 @Named
@@ -39,6 +40,7 @@ public class FechamentoWebBean implements Serializable {
 	private List<RegistroFechamento> registrosGastos;
 	
 	private LineChartModel balancoAnual;
+	private LineChartModel comparacaoAnoAnterior;
 
 	@PostConstruct
 	public void init() {
@@ -64,6 +66,62 @@ public class FechamentoWebBean implements Serializable {
 	
 	public void popularRegistrosAnual(){
 		criarGraficoBalancoAnual();
+		criarGraficoComparacaoAnoAnterior();
+	}
+	
+	private void criarGraficoComparacaoAnoAnterior() {
+		comparacaoAnoAnterior = inicializarComparacaoAnoAnterior();
+		comparacaoAnoAnterior.setTitle(registroFechamentoConsulta.getAno() + " x " + getAnoAnterior());
+		comparacaoAnoAnterior.setLegendPosition("e");
+		comparacaoAnoAnterior.setAnimate(true);
+		Axis xAxis = comparacaoAnoAnterior.getAxis(AxisType.X);
+		Axis yAxis = comparacaoAnoAnterior.getAxis(AxisType.Y);
+        xAxis.setMin(0);
+        xAxis.setMax(12);
+        xAxis.setLabel("Meses");
+        yAxis = comparacaoAnoAnterior.getAxis(AxisType.Y);
+        yAxis.setMin(0);
+        yAxis.setMax(getValorMaximoGrafico());
+	}
+
+	private LineChartModel inicializarComparacaoAnoAnterior() {
+		LineChartModel model = new LineChartModel();
+        ChartSeries caixa = popularCaixaBalancoAnual();
+        ChartSeries gastos = popularGastosBalancoAnual();
+        ChartSeries caixaAnterior = popularCaixaAnoAnterior();
+        ChartSeries gastosAnterior = popularGastosAnoAnterior();
+        model.addSeries(caixa);
+        model.addSeries(gastos);
+        model.addSeries(caixaAnterior);
+        model.addSeries(gastosAnterior);
+         
+        return model;
+	}
+
+	private ChartSeries popularGastosAnoAnterior() {
+		ChartSeries registrosGastosAnoAnterior = new ChartSeries();
+		registrosGastosAnoAnterior.setLabel("Gastos ano anterior");
+		List<RegistroGrafico> registrosCaixaGrafico = registroFechamentoService.buscarRegistrosGraficoAnual(getAnoAnterior(), "GASTOS");
+		for (RegistroGrafico registroGrafico : registrosCaixaGrafico) {
+			registrosGastosAnoAnterior.set(registroGrafico.getLabel(), registroGrafico.getValor());
+		}
+		return registrosGastosAnoAnterior;
+	}
+	
+	private String getAnoAnterior() {
+		Integer ano = new Integer(registroFechamentoConsulta.getAno());
+		Integer anoAnterior = ano - 1;
+		return anoAnterior.toString();
+	}
+
+	private ChartSeries popularCaixaAnoAnterior() {
+		ChartSeries registrosCaixaAnoAnterior = new ChartSeries();
+		registrosCaixaAnoAnterior.setLabel("Caixa ano anterior");
+		List<RegistroGrafico> registrosCaixaGrafico = registroFechamentoService.buscarRegistrosGraficoAnual(getAnoAnterior(), "CAIXA");
+		for (RegistroGrafico registroGrafico : registrosCaixaGrafico) {
+			registrosCaixaAnoAnterior.set(registroGrafico.getLabel(), registroGrafico.getValor());
+		}
+		return registrosCaixaAnoAnterior;
 	}
 
 	private void criarGraficoBalancoAnual() {
@@ -83,7 +141,10 @@ public class FechamentoWebBean implements Serializable {
 	
 	private Object getValorMaximoGrafico() {
 		BigDecimal valorMaximo = registroFechamentoService.buscarValorMaximoGraficoBalancoGeral(registroFechamentoConsulta.getAno());
-		return valorMaximo != null ? valorMaximo.add(new BigDecimal(500)) : BigDecimal.ZERO;
+		BigDecimal valorMaximoAnoAnterior = registroFechamentoService.buscarValorMaximoGraficoBalancoGeral(getAnoAnterior());
+		BigDecimal maiorValor = Util.getMaiorValor(valorMaximo, valorMaximoAnoAnterior);
+		
+		return maiorValor != null ? maiorValor.add(new BigDecimal(500)) : BigDecimal.ZERO;
 	}
 
 	private LineChartModel inicializarBalancoAnual() {
@@ -242,6 +303,14 @@ public class FechamentoWebBean implements Serializable {
 
 	public void setBalancoAnual(LineChartModel balancoAnual) {
 		this.balancoAnual = balancoAnual;
+	}
+
+	public LineChartModel getComparacaoAnoAnterior() {
+		return comparacaoAnoAnterior;
+	}
+
+	public void setComparacaoAnoAnterior(LineChartModel comparacaoAnoAnterior) {
+		this.comparacaoAnoAnterior = comparacaoAnoAnterior;
 	}
 
 }

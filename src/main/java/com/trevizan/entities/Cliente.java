@@ -15,18 +15,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cliente")
 @NamedQueries({
+		@NamedQuery(name = Cliente.CLIENTE_POR_NOME, query = "SELECT c FROM Cliente c " + "WHERE c.nome = :nome"),
 		@NamedQuery(name = Cliente.COUNT_CLIENTES_POR_NOME, query = "SELECT COUNT(c)"
 				+ " FROM Cliente c " + "WHERE c.nome = :nome"),
 		@NamedQuery(name = Cliente.CLIENTES_POR_NOME, query = "SELECT c " + " FROM Cliente c "
+				+ "WHERE upper(c.nome) LIKE upper(:nome) ORDER BY nome"),
+		@NamedQuery(name = Cliente.NOMES_CLIENTES_POR_NOME, query = "SELECT c.nome " + " FROM Cliente c "
 				+ "WHERE upper(c.nome) LIKE upper(:nome) ORDER BY nome"),
 		@NamedQuery(name = Cliente.BUSCAR_TODOS_CLIENTES, query = "SELECT c FROM Cliente c ORDER BY nome"),
 		@NamedQuery(name = Cliente.COUNT_CLIENTES, query = "SELECT COUNT(c) FROM Cliente c") 
 })
 public class Cliente {
 	public static final String COUNT_CLIENTES_POR_NOME = "COUNT_CLIENTES_POR_NOME";
+	public static final String CLIENTE_POR_NOME = "CLIENTE_POR_NOME";
 	public static final String CLIENTES_POR_NOME = "CLIENTES_POR_NOME";
 	public static final String BUSCAR_TODOS_CLIENTES = "BUSCAR_TODOS_CLIENTES";
 	public static final String COUNT_CLIENTES = "COUNT_CLIENTES";
+	public static final String NOMES_CLIENTES_POR_NOME = "NOMES_CLIENTES_POR_NOME";
 
 	@Id
 	@SequenceGenerator(name = "cliente_seq", sequenceName = "cliente_seq", allocationSize = 1)

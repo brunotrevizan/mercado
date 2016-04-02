@@ -16,18 +16,27 @@
 								<div class="panel-heading">Busca</div>
 								<div class="panel-body">
 									<div class="form-group">
-										<h:selectOneMenu id="comboClientes" 
-											styleClass="form-control"
-											converter="omnifaces.SelectItemsConverter"
-											value="#{buscaRegistroWebBean.cliente}">
-											<f:selectItem itemLabel="Selecione" />
-											<f:selectItems value="#{buscaRegistroWebBean.clientes}"
-												var="cliente" itemLabel="#{cliente.nome}"
-												itemValue="#{cliente}" />
-											<p:ajax event="change"
-												listener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}"
-												update="panelRegistros,gridCadastroRegistros" />
-										</h:selectOneMenu>
+<!-- 										<h:selectOneMenu id="comboClientes"  -->
+<!-- 											styleClass="form-control" -->
+<!-- 											converter="omnifaces.SelectItemsConverter" -->
+<!-- 											value="#{buscaRegistroWebBean.cliente}"> -->
+<!-- 											<f:selectItem itemLabel="Selecione" /> -->
+<!-- 											<f:selectItems value="#{buscaRegistroWebBean.clientes}" -->
+<!-- 												var="cliente" itemLabel="#{cliente.nome}" -->
+<!-- 												itemValue="#{cliente}" /> -->
+<!-- 											<p:ajax event="change" -->
+<!-- 												listener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}" -->
+<!-- 												update="panelRegistros,gridCadastroRegistros" /> -->
+<!-- 										</h:selectOneMenu> -->
+										<p:autoComplete id="comboClientes" dropdown="true"
+											inputStyle="width: 180%"
+											value="#{buscaRegistroWebBean.nomeCliente}"
+											completeMethod="#{buscaRegistroWebBean.completarListaClientes}">
+											<p:ajax event="itemSelect"
+												listener="#{buscaRegistroWebBean.buscarRegistrosPorClienteComplete}"
+												update="panelRegistros, gridCadastroRegistros" /> 
+										</p:autoComplete>
+
 									</div>
 								</div>
 							</div>

@@ -46,7 +46,7 @@ import org.hibernate.annotations.Check;
 						+ "AND r.tipoRegistro = 'GASTOS'"),
 	@NamedQuery(name = RegistroFechamento.ANOS_REGISTROS, 
 				query = "SELECT DISTINCT CAST(YEAR(r.dataRegistro) AS string) "
-						+ " FROM RegistroFechamento r ")
+						+ " FROM RegistroFechamento r ORDER BY 1")
 })
 public class RegistroFechamento {
 

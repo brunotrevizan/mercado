@@ -12,6 +12,27 @@
 					#{homeWebBean.buscarSaudacao()} <br />
 				</h1>
 			</div>
+			<div class="col-lg-12">
+				<div class="col-lg-6">
+					<h3>Algumas notícias:</h3>
+					<br />
+					<p:panel >
+						<p:feedReader value="http://g1.globo.com/dynamo/rss2.xml" var="feed" size="3">
+						    <h:outputText value="#{feed.title}" style="font-weight: bold;display:block"/>
+						    <h:outputText value="#{feed.description.value}" escape="false"/>
+						    <p:separator />
+						</p:feedReader>
+					</p:panel>
+				</div>
+				<div class="col-lg-6">
+					<h3>Previsão do tempo: </h3> <br/>
+					<iframe
+						src="http://www.tempoagora.com.br/ta-widgets?cidades=CapivarideBaixo-SC&amp;tipo=horizontal"
+						scrolling="no" allowtransparency="yes" frameborder="0" height="200"
+						width="300"/>
+					<br />
+				</div>
+			</div>
 		</div>
 	</ui:define>
 </ui:decorate>

@@ -12,6 +12,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
 import com.trevizan.entities.Cliente;
 import com.trevizan.entities.Registro;
 import com.trevizan.service.ClienteService;
@@ -45,6 +47,7 @@ public class BuscaRegistroWebBean implements Serializable {
 	private List<Registro> registros;
 	
 	private String nomeBusca;
+	private String nomeCliente;
 	
 	private Registro registro;
 
@@ -66,6 +69,10 @@ public class BuscaRegistroWebBean implements Serializable {
 		}
 	}
 
+	public List<String> completarListaClientes(String query) {
+		return clienteService.buscarNomesClientesPorNome(query);
+    }
+	
 	private boolean registroPossuiValor() {
 		return registro.getValor() != null && registro.getValor().compareTo(BigDecimal.ZERO) == 1;
 	}
@@ -104,6 +111,13 @@ public class BuscaRegistroWebBean implements Serializable {
 	}
 	
 	public void buscarRegistrosPorCliente(){
+		if(cliente != null){
+			registros = contaService.buscarRegistrosPorConta(cliente.getConta());
+		}
+	}
+	
+	public void buscarRegistrosPorClienteComplete(SelectEvent event) {
+		cliente = clienteService.buscarClientePorNome(event.getObject().toString());
 		if(cliente != null){
 			registros = contaService.buscarRegistrosPorConta(cliente.getConta());
 		}
@@ -175,6 +189,14 @@ public class BuscaRegistroWebBean implements Serializable {
 
 	public void setRegistro(Registro registro) {
 		this.registro = registro;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
 	}
 
 }

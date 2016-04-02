@@ -95,4 +95,19 @@ public class ClienteBusiness implements ClienteService {
 		return count.toString();
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<String> buscarNomesClientesPorNome(String nomeBusca) {
+		return entityManager.createNamedQuery(Cliente.NOMES_CLIENTES_POR_NOME)
+				.setParameter("nome", "%" + nomeBusca + "%")
+				.getResultList();
+	}
+
+	@Override
+	public Cliente buscarClientePorNome(String nome) {
+		return (Cliente) entityManager.createNamedQuery(Cliente.CLIENTE_POR_NOME)
+				.setParameter("nome", nome)
+				.getSingleResult();
+	}
+
 }

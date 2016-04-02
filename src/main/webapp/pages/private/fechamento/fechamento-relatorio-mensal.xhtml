@@ -17,12 +17,9 @@
 								converter="omnifaces.SelectItemsConverter"
 								disabled="#{fechamentoWebBean.desabilitarComboAno()}"
 								value="#{fechamentoWebBean.registroFechamentoConsulta.ano}">
-								<f:selectItem itemLabel="2015" itemValue="2015" />
-								<f:selectItem itemLabel="2016" itemValue="2016" />
-								<f:selectItem itemLabel="2017" itemValue="2017" />
-								<f:selectItem itemLabel="2018" itemValue="2018" />
-								<f:selectItem itemLabel="2019" itemValue="2019" />
-								<f:selectItem itemLabel="2020" itemValue="2020" />
+								<f:selectItems value="#{fechamentoWebBean.buscarAnosDisponiveis()}"
+												var="ano" itemLabel="#{ano}"
+												itemValue="#{ano}" />
 								<p:ajax event="change" listener="#{fechamentoWebBean.popularRegistros()}" update="panelRelatorios" />
 							</h:selectOneMenu>
 						</h:panelGroup>

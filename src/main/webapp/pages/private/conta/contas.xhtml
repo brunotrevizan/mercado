@@ -29,10 +29,7 @@
 		        return v;  
 			}  
         </script>
-		<p:tabView id="tabViewContas" cache="false" styleClass="sem-borda"
-			dynamic="true">
-			<p:ajax event="tabChange" update="tabBusca"
-				listener="#{buscaRegistroWebBean.buscarRegistrosPorCliente()}" />
+		<p:tabView id="tabViewContas" cache="false" styleClass="sem-borda" dynamic="true">
 			<p:tab id="tabBusca" title="Busca de Registros">
 				<ui:include src="/pages/private/conta/buscar-registros.xhtml" />
 			</p:tab>

@@ -4,7 +4,7 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<p:dialog id="modalEditarCliente" header="EditarCliente"
+<p:dialog id="modalEditarCliente" header="Editar Cliente"
 	styleClass="customDialog"
 	widgetVar="editarCliente" modal="true" height="180" resizable="false" onHide="#{clientesWebBean.fecharEdicaoCliente()}">
 	<h:form id="formEditarCliente">
@@ -14,12 +14,12 @@
 				<h:outputLabel for="nomeClienteEdicao" value="Nome:" />
 				<h:inputText id="nomeClienteEdicao" styleClass="form-control"
 					required="true" requiredMessage="Digite um nome para o cliente."
-					value="#{clientesWebBean.cliente.nome}" />
+					value="#{clientesWebBean.clienteEdicao.nome}" />
 				<p:spacer width="2" />
 				<p:spacer width="2" />
 				<h:outputLabel for="telefoneClienteEdicao" value="Telefone:" />
 				<p:inputMask id="telefoneClienteEdicao" styleClass="form-control"
-					value="#{clientesWebBean.cliente.telefone}" required="true"
+					value="#{clientesWebBean.clienteEdicao.telefone}" required="true"
 					requiredMessage="Digite um telefone para o cliente."
 					mask="(99) 9999-9999" />
 				<p:spacer width="2" />

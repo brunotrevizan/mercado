@@ -147,6 +147,13 @@
 			<artifactId>jasperreports</artifactId>
 			<version>5.6.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>rome</groupId>
+			<artifactId>rome</artifactId>
+			<version>0.8</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

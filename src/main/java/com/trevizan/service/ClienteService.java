@@ -15,6 +15,8 @@ public interface ClienteService extends Serializable {
 	public List<Cliente> buscarClientes();
 
 	public List<Cliente> buscarClientesPorNome(String nomeBusca);
+	
+	public List<String> buscarNomesClientesPorNome(String nomeBusca);
 
 	public Cliente buscarClientePorId(Long idCiente);
 
@@ -23,5 +25,7 @@ public interface ClienteService extends Serializable {
 	void salvarEditarCliente(Cliente cliente) throws ClienteBusinessException;
 
 	public String totalClientesCadastrados();
+
+	public Cliente buscarClientePorNome(String string);
 
 }
