@@ -24,6 +24,7 @@
 	<h:inputText id="inputValor" styleClass="form-control"
 		disabled="#{buscaRegistroWebBean.cliente == null}"
 		value="#{buscaRegistroWebBean.registro.valor}"
+		autocomplete="off"
 		onkeypress="mascara(this, valor);">
 		<f:convertNumber currencySymbol="," />
 	</h:inputText>
