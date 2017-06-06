@@ -78,7 +78,7 @@ public class RegistroFechamentoBusiness implements RegistroFechamentoService {
 	@Override
 	public String getLucro(List<RegistroFechamento> registrosCaixa) {
 		BigDecimal totalRegistros = getTotalLista(registrosCaixa);
-		totalRegistros = totalRegistros.multiply(new BigDecimal(0.3));
+		totalRegistros = totalRegistros.multiply(new BigDecimal(0.15));
 		return ValorFormatter.formatarValor(totalRegistros.doubleValue(), true);
 	}
 
