@@ -58,6 +58,9 @@ public class HomeWebBean implements Serializable {
 	}
 	
 	public String buscarSaudacao() {
+		if(getUsuarioLogado() == null){
+			return "Olá usuário.";
+		}
 		return "Olá " + getUsuarioLogado().getNome();
 	}
 
