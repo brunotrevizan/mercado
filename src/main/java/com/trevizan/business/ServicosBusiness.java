@@ -115,6 +115,8 @@ public class ServicosBusiness implements ServicosService {
 				valorTotal = valorTotal.add(configuracao.getValorSegundaViaBigDecimal().multiply(new BigDecimal(servico.getQuantidade())));
 			} else if(tipo.equals(TipoServico.XEROX.getValor())) {
 				valorTotal = valorTotal.add(configuracao.getValorXeroxBigDecimal().multiply(new BigDecimal(servico.getQuantidade())));
+			} else if(tipo.equals(TipoServico.IMPRESSAO_FOTO.getValor())) {
+				valorTotal = valorTotal.add(configuracao.getValorImpressaoFoto().multiply(new BigDecimal(servico.getQuantidade())));
 			}
 		}
 		return ValorFormatter.formatarValor(valorTotal.doubleValue(), false);
@@ -127,13 +129,14 @@ public class ServicosBusiness implements ServicosService {
 	}
 
 	@Override
-	public BigDecimal buscarValorMaximoGraficoBalancoGeral(String ano) {
+	public Integer buscarValorMaximoGraficoBalancoGeral(String ano) {
 		try{
-			return (BigDecimal) entityManager.createNativeQuery(Servico.getConsultaValorMaximoMesPorAno())
+			return (Integer) entityManager.createNativeQuery(Servico.getConsultaValorMaximoMesPorAno())
 					.setParameter("ano", Integer.parseInt(ano))
 					.getSingleResult();
 		}catch (Exception e) {
-			return BigDecimal.ZERO;
+			e.printStackTrace();
+			return 0;
 		}
 	}
 
@@ -176,6 +179,12 @@ public class ServicosBusiness implements ServicosService {
 				.setParameter("ano", Integer.parseInt(ano))
 				.getSingleResult();
 	}
+	
+	private Long buscarTotalImpressaoFotoAnual(String ano){
+		return (Long) entityManager.createNamedQuery(Servico.QUANTIDADE_SERVICOS_IMPRESSAO_FOTO_POR_ANO)
+				.setParameter("ano", Integer.parseInt(ano))
+				.getSingleResult();
+	}
 
 	@Override
 	public String getValorTotalSegundaViaAnual(String ano) {
@@ -192,13 +201,15 @@ public class ServicosBusiness implements ServicosService {
 	@SuppressWarnings("unchecked")
 	private BigDecimal buscarTotalValorServicoAnual(String ano, String tipo) {
 		BigDecimal valorTotal = BigDecimal.ZERO;
-		List<Servico> servicos = entityManager.createNamedQuery(Servico.SERVICOS_SEGUNDA_VIA_POR_ANO).setParameter("ano", Integer.parseInt(ano)).getResultList();
+		List<Servico> servicos = entityManager.createNamedQuery(Servico.SERVICOS_POR_ANO_E_TIPO).setParameter("ano", Integer.parseInt(ano)).setParameter("tipo", tipo).getResultList();
 		for (Servico servico : servicos) {
 			Configuracao configuracao = configuracaoService.buscarConfiguracaoPorDataServico(servico.getDataRegistro());
 			if(tipo.equals(TipoServico.SEGUNDA_VIA.getValor())){
 				valorTotal = valorTotal.add(configuracao.getValorSegundaViaBigDecimal().multiply(new BigDecimal(servico.getQuantidade())));
 			} else if(tipo.equals(TipoServico.XEROX.getValor())) {
 				valorTotal = valorTotal.add(configuracao.getValorXeroxBigDecimal().multiply(new BigDecimal(servico.getQuantidade())));
+			} else if(tipo.equals(TipoServico.IMPRESSAO_FOTO.getValor())) {
+				valorTotal = valorTotal.add(configuracao.getValorImpressaoFoto().multiply(new BigDecimal(servico.getQuantidade())));
 			}
 		}
 		return valorTotal;
@@ -223,6 +234,27 @@ public class ServicosBusiness implements ServicosService {
 		servicosConsulta.setMes(String.valueOf(mes));
 		servicosConsulta.setAno(String.valueOf(ano));
 		return servicosConsulta;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Servico> buscarRegistrosImpressaoFoto(ServicosConsulta servicosConsulta) {
+		return entityManager.createNamedQuery(Servico.SERVICOS_IMPRESSAO_FOTO_POR_MES_E_ANO)
+				.setParameter("ano", Integer.parseInt(servicosConsulta.getAno()))
+				.setParameter("mes", Integer.parseInt(servicosConsulta.getMes()))
+				.getResultList();
+	}
+
+	@Override
+	public String getTotalImpressaoFotoAnual(String ano) {
+		Integer totalImpressaoFotoAnual = buscarTotalImpressaoFotoAnual(ano).intValue();
+		return totalImpressaoFotoAnual.toString();
+	}
+
+	@Override
+	public String getValorTotalImpressaoFotoAnual(String ano) {
+		BigDecimal totalImpressaoFotoAnual = buscarTotalValorServicoAnual(ano, TipoServico.IMPRESSAO_FOTO.getValor());
+		return ValorFormatter.formatarValor(totalImpressaoFotoAnual.doubleValue(), true);
 	}
 
 }

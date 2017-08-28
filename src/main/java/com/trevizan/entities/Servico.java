@@ -29,6 +29,12 @@ import org.hibernate.annotations.Check;
 				+ "WHERE "
 				+ "YEAR(s.dataRegistro) = :ano "
 				+ "AND s.tipoServico = 'XEROX'"),
+	@NamedQuery(name = Servico.SERVICOS_POR_ANO_E_TIPO, 
+		query = "SELECT s "
+			+ " FROM Servico s " 
+			+ "WHERE "
+			+ "YEAR(s.dataRegistro) = :ano "
+			+ "AND s.tipoServico = :tipo"),
 	@NamedQuery(name = Servico.SERVICOS_SEGUNDA_VIA_POR_MES_E_ANO, 
 			query = "SELECT s "
 				+ " FROM Servico s " 
@@ -36,6 +42,13 @@ import org.hibernate.annotations.Check;
 				+ "YEAR(s.dataRegistro) = :ano "
 				+ "AND MONTH(s.dataRegistro) = :mes "
 				+ "AND s.tipoServico = 'SEGUNDA_VIA'"),
+	@NamedQuery(name = Servico.SERVICOS_IMPRESSAO_FOTO_POR_MES_E_ANO, 
+		query = "SELECT s "
+			+ " FROM Servico s " 
+			+ "WHERE "
+			+ "YEAR(s.dataRegistro) = :ano "
+			+ "AND MONTH(s.dataRegistro) = :mes "
+			+ "AND s.tipoServico = 'IMPRESSAO_FOTO'"),
 	@NamedQuery(name = Servico.SERVICOS_XEROX_POR_MES_E_ANO, 
 			query = "SELECT s "
 				+ " FROM Servico s " 
@@ -58,6 +71,12 @@ import org.hibernate.annotations.Check;
 					+ "WHERE "
 					+ "YEAR(s.dataRegistro) = :ano "
 					+ "AND s.tipoServico = 'XEROX'"),
+	@NamedQuery(name = Servico.QUANTIDADE_SERVICOS_IMPRESSAO_FOTO_POR_ANO, 
+		query = "SELECT SUM(s.quantidade) "
+				+ " FROM Servico s " 
+				+ "WHERE "
+				+ "YEAR(s.dataRegistro) = :ano "
+				+ "AND s.tipoServico = 'IMPRESSAO_FOTO'"),
 	@NamedQuery(name = Servico.SERVICO_POR_DIA_E_TIPO, 
 		query = "SELECT servico "
 				+ " FROM Servico servico " 
@@ -74,6 +93,9 @@ public class Servico {
 	public static final String QUANTIDADE_SERVICOS_SEGUNDA_VIA_POR_ANO = "QUANTIDADE_SERVICOS_SEGUNDA_VIA_POR_ANO";
 	public static final String QUANTIDADE_SERVICOS_XEROX_POR_ANO = "QUANTIDADE_SERVICOS_XEROX_POR_ANO";
 	public static final String SERVICO_POR_DIA_E_TIPO = "SERVICO_POR_DIA_E_TIPO";
+	public static final String SERVICOS_IMPRESSAO_FOTO_POR_MES_E_ANO = "SERVICOS_IMPRESSAO_FOTO_POR_MES_E_ANO";
+	public static final String QUANTIDADE_SERVICOS_IMPRESSAO_FOTO_POR_ANO = "QUANTIDADE_SERVICOS_IMPRESSAO_FOTO_POR_ANO";
+	public static final String SERVICOS_POR_ANO_E_TIPO = "SERVICOS_POR_ANO_E_TIPO";
 
 	@Id
 	@SequenceGenerator(name = "servico_seq", sequenceName = "servico_seq", allocationSize = 1)

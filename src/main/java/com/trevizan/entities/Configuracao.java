@@ -43,6 +43,9 @@ public class Configuracao {
 
 	@Column(name = "valor_xerox")
 	private BigDecimal valorXerox;
+
+	@Column(name = "valor_impressao_foto")
+	private BigDecimal valorImpressaoFoto;
 	
 	@Column(name = "ativa")
 	private boolean ativa;
@@ -122,6 +125,14 @@ public class Configuracao {
 
 	public void setAtiva(boolean ativa) {
 		this.ativa = ativa;
+	}
+
+	public BigDecimal getValorImpressaoFoto() {
+		return valorImpressaoFoto;
+	}
+
+	public void setValorImpressaoFoto(BigDecimal valorImpressaoFoto) {
+		this.valorImpressaoFoto = valorImpressaoFoto;
 	}
 
 }

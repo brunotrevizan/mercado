@@ -37,6 +37,7 @@ public class ServicosWebBean implements Serializable {
 	private Servico servico;
 	private ServicosConsulta servicosConsulta;
 	private List<Servico> servicosSegundaVia;
+	private List<Servico> servicosImpressaoFoto;
 	private List<Servico> servicosXerox;
 	
 	private LineChartModel balancoAnual;
@@ -75,19 +76,31 @@ public class ServicosWebBean implements Serializable {
 	}
 	
 	private Object getValorMaximoGrafico() {
-		BigDecimal valorMaximo = servicosService.buscarValorMaximoGraficoBalancoGeral(servicosConsulta.getAno());
-		return valorMaximo != null ? valorMaximo.add(new BigDecimal(500)) : BigDecimal.ZERO;
+		Integer valorMaximo = servicosService.buscarValorMaximoGraficoBalancoGeral(servicosConsulta.getAno());
+		return valorMaximo != null ? valorMaximo + 700 : BigDecimal.ZERO;
 	}
 
 	private LineChartModel inicializarBalancoAnual() {
         LineChartModel model = new LineChartModel();
-        ChartSeries caixa = popularXeroxBalancoAnual();
-        ChartSeries gastos = popularSegundaViaBalancoAnual();
-        model.addSeries(caixa);
-        model.addSeries(gastos);
-         
+        ChartSeries xerox = popularXeroxBalancoAnual();
+        ChartSeries segundaVia = popularSegundaViaBalancoAnual();
+        ChartSeries impressaoFoto = popularImpressaoFotoBalancoAnual();
+        model.addSeries(xerox);
+        model.addSeries(segundaVia);
+        model.addSeries(impressaoFoto);
+        
         return model;
     }
+
+	private ChartSeries popularImpressaoFotoBalancoAnual() {
+		ChartSeries registrosGastos = new ChartSeries();
+		registrosGastos.setLabel("Impressão Foto");
+		List<RegistroGrafico> registrosGastosGrafico = servicosService.buscarRegistrosGraficoAnual(servicosConsulta.getAno(), TipoServico.IMPRESSAO_FOTO.getValor());
+		for (RegistroGrafico registroGrafico : registrosGastosGrafico) {
+			registrosGastos.set(registroGrafico.getLabel(), registroGrafico.getQuantidade());
+		}
+		return registrosGastos;
+	}
 	
 	private ChartSeries popularSegundaViaBalancoAnual() {
 		ChartSeries registrosGastos = new ChartSeries();
@@ -126,6 +139,18 @@ public class ServicosWebBean implements Serializable {
 		}
 		return String.valueOf(count);
 	}
+
+	public String totalImpressaoFoto() {
+		int count = 0;
+		for (Servico servico : servicosImpressaoFoto) {
+			count += servico.getQuantidade();
+		}
+		return String.valueOf(count);
+	}
+	
+	public String totalValorImpressaoFoto(){
+		return servicosService.getTotalValorServico(servicosImpressaoFoto, TipoServico.IMPRESSAO_FOTO.getValor());
+	}
 	
 	public String totalSegundaViaAnual(){
 		try {
@@ -146,6 +171,18 @@ public class ServicosWebBean implements Serializable {
 	public String totalXeroxAnual(){
 		try {
 			return servicosService.getTotalXeroxAnual(servicosConsulta.getAno());
+		} catch (Exception e) {
+			return ValorFormatter.formatarValor(0d, true);
+		}
+	}
+	
+	public String valorTotalImpressaoFotoAnual(){
+		return servicosService.getValorTotalImpressaoFotoAnual(servicosConsulta.getAno());
+	}
+	
+	public String totalImpressaoFotoAnual(){
+		try {
+			return servicosService.getTotalImpressaoFotoAnual(servicosConsulta.getAno());
 		} catch (Exception e) {
 			return ValorFormatter.formatarValor(0d, true);
 		}
@@ -183,6 +220,7 @@ public class ServicosWebBean implements Serializable {
 	public void popularRegistros() {
 		setServicosSegundaVia(servicosService.buscarRegistrosSegundaVia(servicosConsulta));
 		setServicosXerox(servicosService.buscarRegistrosXerox(servicosConsulta));
+		setServicosImpressaoFoto(servicosService.buscarRegistrosImpressaoFoto(servicosConsulta));
 	}
 
 	public Servico getServico() {
@@ -223,6 +261,14 @@ public class ServicosWebBean implements Serializable {
 
 	public void setBalancoAnual(LineChartModel balancoAnual) {
 		this.balancoAnual = balancoAnual;
+	}
+
+	public List<Servico> getServicosImpressaoFoto() {
+		return servicosImpressaoFoto;
+	}
+
+	public void setServicosImpressaoFoto(List<Servico> servicosImpressaoFoto) {
+		this.servicosImpressaoFoto = servicosImpressaoFoto;
 	}
 
 }

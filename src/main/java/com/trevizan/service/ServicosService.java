@@ -25,7 +25,7 @@ public interface ServicosService extends Serializable {
 
 	List<String> buscarAnosDisponiveis();
 
-	BigDecimal buscarValorMaximoGraficoBalancoGeral(String ano);
+	Integer buscarValorMaximoGraficoBalancoGeral(String ano);
 
 	List<RegistroGrafico> buscarRegistrosGraficoAnual(String ano, String tipo);
 
@@ -40,5 +40,11 @@ public interface ServicosService extends Serializable {
 	String getTotalXeroxMes(int mes, int ano);
 
 	String getTotalSegundaViaMes(int mes, int ano);
+
+	List<Servico> buscarRegistrosImpressaoFoto(ServicosConsulta servicosConsulta);
+
+	String getTotalImpressaoFotoAnual(String ano);
+
+	String getValorTotalImpressaoFotoAnual(String ano);
 
 }

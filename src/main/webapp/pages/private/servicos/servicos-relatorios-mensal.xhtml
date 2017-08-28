@@ -72,6 +72,26 @@
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div
+							class="panel panel-primary text-center no-boder bg-color-brown">
+							<div class="panel-body">
+								<i class="fa fa-file-o fa-5x"></i>
+								<h3>#{servicosWebBean.totalImpressaoFoto()}</h3>
+							</div>
+							<div class="panel-footer back-footer-brown">Total Impressão Foto</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div
+							class="panel panel-primary text-center no-boder bg-color-green">
+							<div class="panel-body">
+								<i class="fa fa-usd fa-5x"></i>
+								<h3>#{servicosWebBean.totalValorImpressaoFoto()}</h3>
+							</div>
+							<div class="panel-footer back-footer-green">Valor Impressão Foto</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12">
 						<div class="panel panel-primary text-center no-boder bg-color-blue">
 							<div class="panel-body">
 								<i class="fa fa-print fa-5x"></i>
@@ -97,7 +117,7 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-lg-6">
+							<div class="col-lg-4">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<strong>Segunda via</strong>
@@ -126,7 +146,36 @@
 										</p:dataTable>
 								</div>
 							</div>
-							<div class="col-lg-6">
+							<div class="col-lg-4">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<strong>Impressão Foto</strong>
+									</div>
+										<p:dataTable id="dataTableImpressaoFoto" var="servico" reflow="true"
+											scrollHeight="500" value="#{servicosWebBean.servicosImpressaoFoto}">
+											<p:column headerText="Ação" style="text-align: center">
+												<p:commandButton id="excluirServico"
+													icon="ui-icon-closethick"
+													actionListener="#{servicosWebBean.excluirServico(servico)}"
+													update="dataTableImpressaoFoto,:tabViewServicos:tabViewRelatorios:formRelatoriosFechamento:panelRelatorios" title="Excluir Registro">
+													<p:confirm header="Confirmação" message="Deseja Excluir?"
+														icon="ui-icon-alert" />
+												</p:commandButton>
+											</p:column>
+	
+											<p:column headerText="Data" style="text-align: center">
+												<h:outputText value="#{servico.dataRegistro}">
+													<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+												</h:outputText>
+											</p:column>
+	
+											<p:column headerText="Quantidade" style="text-align: center">
+												<h:outputText value="#{servico.quantidade}"/>
+											</p:column>
+										</p:dataTable>
+								</div>
+							</div>
+							<div class="col-lg-4">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<strong>Xerox</strong>
