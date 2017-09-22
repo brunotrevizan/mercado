@@ -23,7 +23,7 @@ import org.hibernate.annotations.Check;
 	@NamedQuery(name = Registro.REGISTRO_POR_CONTA, 
 			query = "SELECT r "
 			+ " FROM Registro r " 
-			+ "WHERE r.conta.idConta = :idConta"),
+			+ "WHERE r.conta.idConta = :idConta ORDER BY dataRegistro ASC"),
 	@NamedQuery(name = Registro.SOMA_REGISTRO_CLIENTE_DEBITO, 
 			query = "SELECT SUM(r.valor) "
 			+ " FROM Registro r " 
