@@ -183,7 +183,7 @@
 					<source>1.7</source>
 					<target>1.7</target>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<outputDirectory>./deployments</outputDirectory>
+					<outputDirectory>../deployments</outputDirectory>
 					<warName>mercadotrevizan</warName>
 				</configuration>
 			</plugin>
