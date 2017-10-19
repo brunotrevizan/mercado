@@ -184,7 +184,7 @@
 					<target>1.7</target>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<outputDirectory>../deployments</outputDirectory>
-					<warName>mercadotrevizan</warName>
+					<warName>ROOT</warName>
 				</configuration>
 			</plugin>
 		</plugins>
